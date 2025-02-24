@@ -7,6 +7,7 @@ const FooterContainer = styled.footer`
     posuition: fixed;
     bottom: 0;
     width: 100%;
+    border-top: 1px dotted gray;
 
 
 `;
@@ -14,7 +15,7 @@ const FooterContainer = styled.footer`
 const Footer = () => {
     return (
         <FooterContainer>
-            <p>푸터임</p>
+            <p>footer</p>
         </FooterContainer>
     );
 };

@@ -8,10 +8,11 @@ const HeaderContainer = styled.header`
     width: 100%;
     height: 3rem;
     margin-top: 0.5rem;
+    margin-bottom: 1rem;
     border-bottom: 1px dotted gray;
 `;
 
-const Title = styled.span`
+const Title = styled.h1`
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0 1rem;

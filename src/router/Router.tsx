@@ -1,6 +1,9 @@
 import { Route, Routes} from "react-router-dom";
 import MainLayout from "@/layout/MainLayout";
+
 import Home from "@/page/mainlayout/Home";
+import FindGroup from "@/page/mainlayout/FindGroup";
+import VoteGroup from "@/page/mainlayout/VoteGroup";
 
 
 
@@ -19,6 +22,8 @@ const Router = () => {
         <Routes>
             <Route path={'/'} element={<MainLayout/>}>
                 <Route path={''} element={<Home/>}></Route>
+                <Route path={'find_group'} element={<FindGroup />}></Route>
+                <Route path={'vote_group'} element={<VoteGroup />}></Route>
             </Route>
 
 
