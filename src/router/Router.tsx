@@ -3,6 +3,7 @@ import MainLayout from "@/layout/MainLayout";
 import Home from "@/page/mainlayout/Home";
 
 
+
 /**
  * / 로 접근시 MainLayout 을 타게되고 ''같이 경로가 없다면 Home 을 보여주게됩니다.
  * 이후 /login, /register, /rank ... 을 추가로 보여줘야하는데 Header와 Footer가 같다면

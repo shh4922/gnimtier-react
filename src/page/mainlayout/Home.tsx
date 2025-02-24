@@ -1,13 +1,16 @@
+import styled from 'styled-components';
 
+const Wrapper = styled.div`
+    
+`;
 
-const Home = () => {
+export default function Home() {
     return (
-        <div>
+        <Wrapper>
             <h1>홈임ㅋㅋ</h1>
             <h1>홈임ㅋㅋ</h1>
             <h1>홈임ㅋㅋ</h1>
-        </div>
+        </Wrapper>
     );
 };
 
-export default Home;
