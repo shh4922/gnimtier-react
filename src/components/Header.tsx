@@ -1,14 +1,25 @@
 import styled from "styled-components";
 
+import { FaRegCompass } from "react-icons/fa";
+import { IoMdSearch } from "react-icons/io";
+import { RxHamburgerMenu } from "react-icons/rx";
+
+const MobileContainer = styled.div`
+    max-width: 480px;
+    min-width: 320px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`;
+
 const HeaderContainer = styled.header`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 3rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
+    height: 4.3rem;
+    padding: 0.5rem 0;
     border-bottom: 1px dotted gray;
 `;
 
@@ -30,14 +41,17 @@ const Icon = styled.span`
 
 export default function Header () {
     return (
-        <HeaderContainer>
-            <Title>ㄱㄴㅌ?</Title>
-            <HeaderNav>
-                <Icon>나침반</Icon>
-                <Icon>돋보기</Icon>
-                <Icon>더보기</Icon>
-            </HeaderNav>
+        <MobileContainer>
+            <HeaderContainer>
+                <Title>ㄱㄴㅌ?</Title>
+                <HeaderNav>
+                    <Icon><FaRegCompass /></Icon>
+                    <Icon><IoMdSearch /></Icon>
+                    <Icon><RxHamburgerMenu /></Icon>
+                </HeaderNav>
         </HeaderContainer>
+        </MobileContainer>
+        
     );
 };
 
