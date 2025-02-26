@@ -8,6 +8,5 @@ export interface authResponse {
 
 export function fetchTokenWithKakaoCode(code: string):Promise<authResponse> {
     const params= { code: code }
-
     return get("/auth/oauth/kakao",{ params:params })
 }

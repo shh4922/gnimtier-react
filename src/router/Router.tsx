@@ -1,6 +1,8 @@
 import { Route, Routes} from "react-router-dom";
 import MainLayout from "@/layout/MainLayout";
 import Home from "@/page/mainlayout/Home";
+import ApiTestDummyPage from "@/page/mainlayout/ApiTestDummyPage";
+import KakaoLogin from "@/page/mainlayout/KakaoLogin";
 
 
 /**
@@ -18,6 +20,8 @@ const Router = () => {
         <Routes>
             <Route path={'/'} element={<MainLayout/>}>
                 <Route path={''} element={<Home/>}></Route>
+                <Route path={'/dummy'} element={<ApiTestDummyPage/>}></Route>
+                <Route path={'/kakaoLogin'} element={<KakaoLogin/>}></Route>
             </Route>
 
 
