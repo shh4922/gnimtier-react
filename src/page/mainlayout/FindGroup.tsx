@@ -60,32 +60,30 @@ type ViewType = 'main' | 'choice' | 'army' | 'navy' | 'airForce' | 'marine';
 export default function FindGroup() {
     const [currentView, setCurrentView] = useState<ViewType>('main');
 
-    const moveToMilitaryChoice = () => {
-        setCurrentView('choice');
-    };
+    const rootGroup: {view:ViewType; name:string}[] = [
+        {view:'main', name:'메인'},
+        {view:'choice', name:'군대'},
+    ]
+    const armyGroupList : {view:ViewType; name:string}[] = [
+        {view:'army', name:'육군'},
+        {view:'navy', name:'해군'},
+        {view:'airForce', name:'공군'},
+        {view:'marine', name:'marine'},
+    ]
 
-    const moveToArmyCommand = () => {
-        setCurrentView('army');
-    };
-
-    const moveToNavyCommand = () => {
-        setCurrentView('navy');
-    };
-
-    const moveToAirForceCommand = () => {
-        setCurrentView('airForce');
-    };
-
-    const moveToMarineCommand = () => {
-        setCurrentView('marine');
-    };
+    const moveToChildrenView = (view:ViewType) => {
+        setCurrentView(view)
+    }
 
     // main 화면 컴포넌트
     const MainView = () => (
         <FindWrapper>
             <ChoiceContainer>
-                <FirstChoiceBtn onClick={moveToMilitaryChoice}>군대</FirstChoiceBtn>
-                <FirstChoiceBtn>학교</FirstChoiceBtn>
+                {
+                    rootGroup.map((rootView) => (
+                        <FirstChoiceBtn onClick={ ()=>{moveToChildrenView(rootView.view)}} key={rootView.view}>{rootView.name}</FirstChoiceBtn>
+                    ))
+                }
             </ChoiceContainer>
             <EnterGroupBtn />
         </FindWrapper>
@@ -95,10 +93,11 @@ export default function FindGroup() {
     const MilitaryChoiceView = () => (
         <FindWrapper>
             <ChoiceContainer>
-                <FirstChoiceBtn onClick={moveToArmyCommand}>육군</FirstChoiceBtn>
-                <FirstChoiceBtn onClick={moveToNavyCommand}>해군</FirstChoiceBtn>
-                <FirstChoiceBtn onClick={moveToAirForceCommand}>공군</FirstChoiceBtn>
-                <FirstChoiceBtn onClick={moveToMarineCommand}>해병대</FirstChoiceBtn>
+                {
+                    armyGroupList.map((rootView) => (
+                        <FirstChoiceBtn onClick={ ()=>{moveToChildrenView(rootView.view)}} key={rootView.view}>{rootView.name}</FirstChoiceBtn>
+                    ))
+                }
             </ChoiceContainer>
             <EnterGroupBtn />
         </FindWrapper>
@@ -120,11 +119,11 @@ export default function FindGroup() {
             case 'marine':
                 return <MilitaryCommandCenter type='marine' onBack={()=>setCurrentView('choice')} />;
             default:
-                return <MainView />;    
+                return <MainView />;
         }
     };
-    
-    
+
+
     return (
         <MobileContainer>
             <Find>
@@ -132,7 +131,7 @@ export default function FindGroup() {
                 {renderContent()}
             </Find>
         </MobileContainer>
-        
-        
+
+
     );
 };
