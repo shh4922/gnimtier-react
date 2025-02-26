@@ -5,6 +5,8 @@ import Home from "@/page/mainlayout/Home";
 import FindGroup from "@/page/mainlayout/FindGroup";
 import VoteGroup from "@/page/mainlayout/VoteGroup";
 
+import ApiTestDummyPage from "@/page/mainlayout/ApiTestDummyPage";
+import KakaoLogin from "@/page/mainlayout/KakaoLogin";
 
 
 /**
@@ -24,6 +26,8 @@ const Router = () => {
                 <Route path={''} element={<Home/>}></Route>
                 <Route path={'find_group'} element={<FindGroup />}></Route>
                 <Route path={'vote_group'} element={<VoteGroup />}></Route>
+                <Route path={'/dummy'} element={<ApiTestDummyPage/>}></Route>
+                <Route path={'/kakaoLogin'} element={<KakaoLogin/>}></Route>
             </Route>
 
 

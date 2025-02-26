@@ -9,19 +9,20 @@ import {removeToken, setTokenInLocal} from "@/utils/token";
  * 차후에 서버에서 데이터를 받는법을 익히면 다시 설명드리겠습니다.
  */
 const interceptorAxios = axios.create({
-    baseURL: import.meta.env.VITE_BASEURL+import.meta.env.VITE.API_VERSION,
+    baseURL: import.meta.env.VITE_BASEURL+import.meta.env.VITE_API_VERSION,
     timeout: 5000,
 })
 
 interceptorAxios.interceptors.request.use(
     (config) => {
-        const accessToken = localStorage.getItem("a")
-
+        const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJzdWIiOiJlMjA4NzJlMy02NWU1LTQ5MjgtYjI0Ni05MjgxZmQwNWExNWQiLCJpYXQiOjE3NDA0MDc3OTQsImV4cCI6MTc0MDQwODY5NH0.xchnGps0lgrORFMO9ZCOBCmsS5JtpWF9seuVhMfppK8"
+            // localStorage.getItem("a")
+        console.log(accessToken)
         if(accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`
             config.headers["Content-Type"] = "application/json"
         }
-        console.log(config)
+        console.log("header",config.headers)
         return config
     }
 )
@@ -34,7 +35,7 @@ interceptorAxios.interceptors.response.use(
             case 401:
                 try {
                     const refresh = localStorage.getItem('r')
-
+                    // const refresh = "eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJyZWZyZXNoIiwic3ViIjoiZTIwODcyZTMtNjVlNS00OTI4LWIyNDYtOTI4MWZkMDVhMTVkIiwiaWF0IjoxNzQwNDAzNTM1LCJleHAiOjE3NDEwMDgzMzV9.zkjlWJMQ0-_dYHrQWqcuiVgjIDSjCOBTc3IdvCriq74"
                     const headers = {
                         'Content-Type': 'application/json',
                         'refresh': `Bearer ${refresh}`,
@@ -64,7 +65,7 @@ interceptorAxios.interceptors.response.use(
                 }
 
             case 500:
-                // alert("500:서버로부터 에러가 발생했습니다.")
+                console.error(error)
                 throw 500
             default:
                 // alert("default에러남.")
