@@ -1,29 +1,8 @@
-import {getWithToken, postWithToken} from "@/api/http";
-import {Summoner, User} from "@/api/user/model.tft";
+import {getWithToken} from "@/api/http";
+import {Summoner, tftUserInfoResponse, User} from "@/api/user/model.tft";
 import axios from "axios";
+import {useQuery} from "@tanstack/react-query";
 
-export interface tftUserInfoResponse {
-    data: tftUserInfo[];
-    sortBy: string|null;
-    pageSize: number;
-    totalPages: number;
-    totalElements: number;
-    hasNext : boolean;
-    hasPrevious : boolean;
-}
-
-export interface tftUserInfo {
-    user: User;
-    summoner: Summoner;
-}
-
-export interface groupResponse {
-    id: string;
-    name: string;
-    description: string;
-    parentId: string;
-    isRoot: boolean;
-}
 
 /**
  * 그룹 리스트 조회
@@ -113,4 +92,16 @@ export function checkRiotAccount(puuid:string) {
         console.error(error)
         throw error
     }
+}
+
+
+export const useProfile = () => {
+    return useQuery({
+        queryFn: () => getWithToken<User>('users/me'),
+        queryKey: ["me"],
+        gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
+        staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
+        retry:2,
+        refetchOnWindowFocus: false, // 윈도우 탭 전환시, 다시 패치 false
+    })
 }

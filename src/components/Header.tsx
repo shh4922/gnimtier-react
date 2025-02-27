@@ -49,9 +49,9 @@ export default function Header () {
                     <Icon><IoMdSearch /></Icon>
                     <Icon><RxHamburgerMenu /></Icon>
                 </HeaderNav>
-        </HeaderContainer>
+            </HeaderContainer>
         </MobileContainer>
-        
+
     );
 };
 

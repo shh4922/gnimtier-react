@@ -31,3 +31,25 @@ export interface Summoner {
     };
 }
 
+export interface tftUserInfoResponse {
+    data: tftUserInfo[];
+    sortBy: string|null;
+    pageSize: number;
+    totalPages: number;
+    totalElements: number;
+    hasNext : boolean;
+    hasPrevious : boolean;
+}
+
+export interface tftUserInfo {
+    user: User;
+    summoner: Summoner;
+}
+
+export interface groupResponse {
+    id: string;
+    name: string;
+    description: string;
+    parentId: string;
+    isRoot: boolean;
+}

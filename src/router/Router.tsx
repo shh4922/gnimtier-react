@@ -26,9 +26,9 @@ const Router = () => {
                 <Route path={''} element={<Home/>}></Route>
                 <Route path={'find_group'} element={<FindGroup />}></Route>
                 <Route path={'vote_group'} element={<VoteGroup />}></Route>
-                <Route path={'/dummy'} element={<ApiTestDummyPage/>}></Route>
-                <Route path={'/kakaoLogin'} element={<KakaoLogin/>}></Route>
             </Route>
+            <Route path={'/dummy'} element={<ApiTestDummyPage/>}></Route>
+            <Route path={'/kakaologin'} element={<KakaoLogin/>}></Route>
 
 
         </Routes>

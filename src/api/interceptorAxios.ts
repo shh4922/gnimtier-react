@@ -15,14 +15,13 @@ const interceptorAxios = axios.create({
 
 interceptorAxios.interceptors.request.use(
     (config) => {
-        const accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJzdWIiOiJlMjA4NzJlMy02NWU1LTQ5MjgtYjI0Ni05MjgxZmQwNWExNWQiLCJpYXQiOjE3NDA0MDc3OTQsImV4cCI6MTc0MDQwODY5NH0.xchnGps0lgrORFMO9ZCOBCmsS5JtpWF9seuVhMfppK8"
-            // localStorage.getItem("a")
-        console.log(accessToken)
+        const accessToken = localStorage.getItem("a")
+
         if(accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`
             config.headers["Content-Type"] = "application/json"
         }
-        console.log("header",config.headers)
+
         return config
     }
 )
@@ -35,7 +34,7 @@ interceptorAxios.interceptors.response.use(
             case 401:
                 try {
                     const refresh = localStorage.getItem('r')
-                    // const refresh = "eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJyZWZyZXNoIiwic3ViIjoiZTIwODcyZTMtNjVlNS00OTI4LWIyNDYtOTI4MWZkMDVhMTVkIiwiaWF0IjoxNzQwNDAzNTM1LCJleHAiOjE3NDEwMDgzMzV9.zkjlWJMQ0-_dYHrQWqcuiVgjIDSjCOBTc3IdvCriq74"
+
                     const headers = {
                         'Content-Type': 'application/json',
                         'refresh': `Bearer ${refresh}`,
