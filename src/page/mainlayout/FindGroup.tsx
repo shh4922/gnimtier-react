@@ -76,6 +76,7 @@ export default function FindGroup() {
     }
 
     // main 화면 컴포넌트
+    // ddd
     const MainView = () => (
         <FindWrapper>
             <ChoiceContainer>
