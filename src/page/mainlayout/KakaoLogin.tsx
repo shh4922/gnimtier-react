@@ -16,13 +16,12 @@ const KakaoLogin = () => {
         removeToken()
         setTokenInLocal(res.access_token, res.refresh_token)
         const userInfo = await fetchMyInfo()
-        userStore.setUserInfo(userInfo)
+        userStore.setUserInfo(userInfo.user)
     }
 
     useEffect(() => {
         const code = new URL(window.location.href).searchParams.get("code") as string;
         getTokenWithCode(code)
-
     }, []);
     return (
         <div>

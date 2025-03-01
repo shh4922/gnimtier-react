@@ -1,14 +1,10 @@
-import {useProfile} from "@/api/user/user";
+import { useProfile} from "@/api/user/user";
+
 
 
 const ApiTestDummyPage = () => {
     /** 내정보 패칭. 없으면 로그인*/
-    const {data:user, isSuccess,isLoading, error} = useProfile()
-
-    /**
-     * 라이엇 정보 패치
-     * 없으면 그룹선택하도록 유도.
-     * */
+    const {data:user, isLoading, error} = useProfile()
 
 
     function goToKakaoLogin(){
@@ -16,7 +12,6 @@ const ApiTestDummyPage = () => {
             redirectUri: "http://localhost:5173/kakaologin",
         })
     }
-
 
     return (
         <div>
@@ -29,6 +24,7 @@ const ApiTestDummyPage = () => {
             { error &&
                 <button onClick={goToKakaoLogin}>에러남. 로그인하러가셈</button>
             }
+
             { user ? (
                 <div>
                     <p>{user.nickname}</p>
@@ -38,6 +34,7 @@ const ApiTestDummyPage = () => {
                 <button onClick={goToKakaoLogin}>정보없음. 로그인하러가셈</button>
             )
             }
+
         </div>
 
     );
