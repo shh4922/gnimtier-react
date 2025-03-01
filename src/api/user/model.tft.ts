@@ -2,6 +2,9 @@ export interface User {
     nickname: string;
     profileImageUrl: string;
 }
+export interface Me {
+    user: User;
+}
 
 export interface SummonerEntry {
     tier: number;
@@ -42,7 +45,7 @@ export interface tftUserInfoResponse {
 }
 
 export interface tftUserInfo {
-    user: User;
+    user:User;
     summoner: Summoner;
 }
 

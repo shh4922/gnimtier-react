@@ -1,5 +1,5 @@
 import {getWithToken} from "@/api/http";
-import {Summoner, tftUserInfoResponse, User} from "@/api/user/model.tft";
+import {Me, Summoner, tftUserInfoResponse, User} from "@/api/user/model.tft";
 import axios from "axios";
 import {useQuery} from "@tanstack/react-query";
 
@@ -9,14 +9,13 @@ import {useQuery} from "@tanstack/react-query";
  * @param groupName
  * @param page
  */
-export function fetchTftUserByGroup(groupName:string = "string",page=1): Promise<tftUserInfoResponse> {
+export function fetchTftUserByGroup(groupId:string = "string"): Promise<tftUserInfoResponse> {
     const params = {
-        "gameName": `${groupName}`,
-        "groupId": `${page}`,
+        "groupId": `${groupId}`,
         "sortBy": "tier",
         "page" : 0
     }
-    const res = getWithToken<tftUserInfoResponse>('/leaderboard/by-group',{
+    const res = getWithToken<tftUserInfoResponse>('/riot/tft/leaderboard/by-group',{
         params: params
     })
     return res
@@ -25,9 +24,9 @@ export function fetchTftUserByGroup(groupName:string = "string",page=1): Promise
 /**
  * 내 카카오 정보 조회
  */
-export function fetchMyInfo():Promise<User> {
+export function fetchMyInfo():Promise<Me> {
     try {
-        const res = getWithToken<User>('users/me')
+        const res = getWithToken<Me>('users/me')
         return res
     } catch (error) {
         console.error(error)
