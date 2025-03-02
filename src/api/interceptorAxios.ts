@@ -1,5 +1,4 @@
 import axios from "axios";
-import { get } from '@/api/http.ts'
 import {authResponse} from "@/api/auth/auth";
 import {removeToken, setTokenInLocal} from "@/utils/token";
 
@@ -41,15 +40,17 @@ interceptorAxios.interceptors.response.use(
                         'Access-Control-Allow-Origin': '*'
                     }
 
-                    const result = await get<authResponse>("/auth/refresh", {
-                        headers: headers,
+                    // const result = await get<authResponse>("/auth/refresh", {
+                    //     headers: headers,
+                    // })
+                    const result =  await axios.get<authResponse>(`${import.meta.env.VITE_BASEURL}${import.meta.env.VITE_API_VERSION}/auth/refresh`, {
+                        headers
                     })
 
-
-                    if(result.access_token !== null) {
-
+                    console.log(result)
+                    if(result.data.access_token !== null) {
                         removeToken()
-                        setTokenInLocal(result.access_token, result.refresh_token)
+                        setTokenInLocal(result.data.access_token, result.data.refresh_token)
                     } else {
                         alert("세션이 만료되었습니다.")
                         return Promise.reject(error)
