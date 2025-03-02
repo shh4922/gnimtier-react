@@ -1,10 +1,10 @@
-import { useProfile} from "@/api/user/user";
+import {useFetchMyProfile} from "@/api/user/user";
 
 
 
 const ApiTestDummyPage = () => {
     /** 내정보 패칭. 없으면 로그인*/
-    const {data:user, isLoading, error} = useProfile()
+    const {data:user, isLoading, error} = useFetchMyProfile()
 
 
     function goToKakaoLogin(){
@@ -27,8 +27,8 @@ const ApiTestDummyPage = () => {
 
             { user ? (
                 <div>
-                    <p>{user.nickname}</p>
-                    <img src={user.profileImageUrl}/>
+                    <p>{user.user.nickname}</p>
+                    <img src={user.user.profileImageUrl}/>
                 </div>
             ) : (
                 <button onClick={goToKakaoLogin}>정보없음. 로그인하러가셈</button>

@@ -8,6 +8,8 @@ import FindGroup from "@/page/mainlayout/FindGroup";
 import VoteGroup from "@/page/mainlayout/VoteGroup";
 import DummyPage2 from "@/page/mainlayout/DummyPage2";
 import DummyPage3 from "@/page/mainlayout/DummyPage3";
+import DummyPage4TestHook from "@/page/mainlayout/DummyPage4TestHook";
+import DummyPage5 from "@/page/mainlayout/DummyPage5";
 
 
 
@@ -32,6 +34,8 @@ const Router = () => {
             <Route path={'/dummy'} element={<ApiTestDummyPage/>}></Route>
             <Route path={'/dummy2'} element={<DummyPage2/>}></Route>
             <Route path={'/dummy3'} element={<DummyPage3/>}></Route>
+            <Route path={'/dummy4'} element={<DummyPage4TestHook/>}></Route>
+            <Route path={'/dummy5'} element={<DummyPage5/>}></Route>
             <Route path={'/kakaologin'} element={<KakaoLogin/>}></Route>
 
 
