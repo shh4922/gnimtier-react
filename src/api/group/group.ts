@@ -14,14 +14,16 @@ export interface GroupListResponse {
     groups: Group[];
 }
 
-export const useGroupList = () => {
+export const useFetchGroupList = () => {
     return useQuery({
         queryKey: ['groupList'],
         queryFn: () => getWithToken<GroupListResponse>("/users/groups"),
+        // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
+        // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
     });
 };
 
-export const useGroupsByGroupId = (groupId?: string, page=0) => {
+export const useFetchGroupsUserByGroupId = (groupId?: string, page=0) => {
     const params = {
         "groupId": `${groupId}`,
         "sortBy": "tier",
@@ -32,17 +34,21 @@ export const useGroupsByGroupId = (groupId?: string, page=0) => {
         queryFn: () => getWithToken<tftUserInfoResponse>('/riot/tft/leaderboard/by-group',{
             params: params
         }),
+        // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
+        // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
         enabled: !!groupId, // groupId가 있을 때만 실행
     });
 };
 
 export const useFetchGroupByParentId = (parentId: string|null=null) => {
+    console.log("그룹리스트 요청")
     const params = parentId ? {parentId: `${parentId}`} : undefined
     return useQuery({
         queryKey: ['parentGroup', parentId],
         queryFn: () => get<GroupListResponse>('/groups/by-parentId',{
             params: params
         }),
+
 
     });
 }
