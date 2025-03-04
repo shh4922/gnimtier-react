@@ -6,7 +6,13 @@ export interface authResponse {
 }
 
 
-export function fetchTokenWithKakaoCode(code: string):Promise<authResponse> {
+export function fetchTokenWithKakaoCode(code: string):Promise<{tokens: authResponse}> {
     const params= { code: code }
-    return get("/auth/oauth/kakao",{ params:params })
+    return get<{tokens: authResponse}>("/auth/oauth/kakao",{ params:params })
+}
+
+export function fetchRefreshToken(headers:any): Promise<{tokens: authResponse}> {
+    return get<{tokens: authResponse}>("/auth/refresh",{
+        headers:headers,
+    })
 }

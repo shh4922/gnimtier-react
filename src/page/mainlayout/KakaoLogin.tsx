@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 import {removeToken, setTokenInLocal} from "@/utils/token";
 import useUserStore from "@/store/userStore";
-import axios from "axios";
 import {fetchMyInfo} from "@/api/user/user";
+import {fetchTokenWithKakaoCode} from "@/api/auth/auth";
 
 /**
  * 응답형식 DefaultResponse로 바꾸고 나면 다시 바꿔야함.
@@ -12,19 +12,12 @@ const KakaoLogin = () => {
     const userStore = useUserStore()
     async function getTokenWithCode(code:string){
         //  대충 리디렉.
-        if(!code){
-            return
-        }
-        const params= { code: code }
-        const res = await axios.get(`${import.meta.env.VITE_BASEURL}${import.meta.env.VITE_API_VERSION}/auth/oauth/kakao`, {
-            params
-        })
+        if(!code){ return }
 
-        // res.data.access_token = res.data.access_token
-        // const res = await fetchTokenWithKakaoCode(code);
+        const res = await fetchTokenWithKakaoCode(code);
         removeToken()
-        setTokenInLocal(res.data.access_token, res.data.refresh_token)
-        // setTokenInLocal(res.access_token, res.refresh_token)
+        setTokenInLocal(res.tokens.access_token, res.tokens.refresh_token)
+
         const userInfo = await fetchMyInfo()
         userStore.setUserInfo(userInfo.user)
     }
@@ -35,9 +28,9 @@ const KakaoLogin = () => {
     }, []);
     return (
         <div>
+            <h1>kakaoLogin 창임</h1>
             {/*<p>{user.nickname}</p>*/}
             {/*<img src={user.profileImageUrl ?? '@/assets/react.svg'} />*/}
-            <h1>kakaoLogin창임</h1>
         </div>
     );
 };

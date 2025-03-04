@@ -1,4 +1,5 @@
 export interface User {
+    id: string; // 그님티서버 userId
     nickname: string;
     profileImageUrl: string;
 }

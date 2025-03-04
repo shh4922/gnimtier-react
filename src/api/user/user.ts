@@ -105,13 +105,13 @@ export const useFetchMyProfile = () => {
     })
 }
 
-export const useFetchMyRiotInfo = () => {
-    return useQuery({
-        queryFn: () => getWithToken<{ summoner:Summoner }>('users/riot/account'),
-        queryKey: ["myRiotInfo"],
-        // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
-        // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
-        // retry:2,
-        refetchOnWindowFocus: false, // 윈도우 탭 전환시, 다시 패치 false
-    })
-}
+// export const useFetchMyRiotInfo = () => {
+//     return useQuery({
+//         queryFn: () => getWithToken<{ summoner:Summoner }>('users/riot/account'),
+//         queryKey: ["myRiotInfo"],
+//         // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
+//         // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
+//         // retry:2,
+//         refetchOnWindowFocus: false, // 윈도우 탭 전환시, 다시 패치 false
+//     })
+// }
