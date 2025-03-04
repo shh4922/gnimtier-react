@@ -3,6 +3,7 @@ import { useFetchGroupList, useFetchGroupsUserByGroupId } from "@/api/group/grou
 import { useEffect, useRef, useState, useCallback } from "react";
 import { tftUserInfo } from "@/api/user/model.tft";
 import Tier from "@/common/Tier";
+import {useFetchMyProfile} from "@/api/user/user";
 
 /**
  * 최적화 필요. 불필요한 렌더링이 한번 일어나는것 같음
@@ -11,7 +12,9 @@ import Tier from "@/common/Tier";
 
 const DummyPage2 = () => {
     const tier = new Tier()
-    const { data: groupData, isLoading: isGroupLoading, isSuccess } = useFetchGroupList();
+    const {data:myInfo} = useFetchMyProfile()
+
+    const { data: groupData, isLoading: isGroupLoading, isSuccess, isError:myGroupError, error } = useFetchGroupList(myInfo?.user.id);
     const firstGroupId = groupData?.groups?.[0]?.id;
 
     const [page, setPage] = useState<number>(0);
@@ -56,15 +59,22 @@ const DummyPage2 = () => {
         }
     }, [groupUserResponse]);
 
+    if(error) {
+        return <div>인증된 라이엇계정이 없음</div>
+    }
+    if(myGroupError) {
+        console.log("myGroupErrer",myGroupError)
+        return <div>내그룹 찾기 에러남</div>
+    }
     if (isGroupLoading) {
         console.log("내가 속한 그룹 리스트 조회 중...");
     }
-    if (isSuccess) {
-        console.log("내가 속한 그룹 리스트 조회 끝:", firstGroupId);
-    }
+
+
 
     if (!firstGroupId) {
         console.log("내가 속한 그룹 없음");
+        console.log(groupUserResponse);
         return <div>속한 그룹이 없습니다. 그룹 가입 페이지로 이동하세요.</div>;
     }
 

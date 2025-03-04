@@ -1,5 +1,5 @@
-import axios from "axios";
-import {authResponse} from "@/api/auth/auth";
+import axios, {AxiosHeaders} from "axios";
+import {authResponse, fetchRefreshToken} from "@/api/auth/auth";
 import {removeToken, setTokenInLocal} from "@/utils/token";
 
 /**
@@ -34,23 +34,17 @@ interceptorAxios.interceptors.response.use(
                 try {
                     const refresh = localStorage.getItem('r')
 
-                    const headers = {
+                    const headers :{ "Content-Type": string; refresh: string; "Access-Control-Allow-Origin": string } = {
                         'Content-Type': 'application/json',
                         'refresh': `Bearer ${refresh}`,
                         'Access-Control-Allow-Origin': '*'
                     }
 
-                    // const result = await get<authResponse>("/auth/refresh", {
-                    //     headers: headers,
-                    // })
-                    const result =  await axios.get<authResponse>(`${import.meta.env.VITE_BASEURL}${import.meta.env.VITE_API_VERSION}/auth/refresh`, {
-                        headers
-                    })
+                    const res =  await fetchRefreshToken(headers)
 
-                    console.log(result)
-                    if(result.data.access_token !== null) {
+                    if(res.tokens.access_token !== null) {
                         removeToken()
-                        setTokenInLocal(result.data.access_token, result.data.refresh_token)
+                        setTokenInLocal(res.tokens.access_token, res.tokens.refresh_token)
                     } else {
                         alert("세션이 만료되었습니다.")
                         return Promise.reject(error)
