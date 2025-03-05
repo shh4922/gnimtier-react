@@ -4,6 +4,9 @@ import MainLayout from "@/layout/MainLayout";
 import Home from "@/page/mainlayout/Home";
 import FindGroup from "@/page/mainlayout/FindGroup";
 import VoteGroup from "@/page/mainlayout/VoteGroup";
+import RankPage from "@/page/mainlayout/RankPage";
+import PersonalPage from "@/page/mainlayout/PersonalPage";
+import MyPage from "@/page/mainlayout/MyPage";
 
 import ApiTestDummyPage from "@/page/mainlayout/ApiTestDummyPage";
 import KakaoLogin from "@/page/mainlayout/KakaoLogin";
@@ -17,7 +20,7 @@ import KakaoLogin from "@/page/mainlayout/KakaoLogin";
  * 만약 Header, Footer 등을 변경하는 새로운페이지를 만들게된다면 새로운 레이아웃을 만든후,
  * 하위 컴포넌트를 추가하면됩니다.
  * @constructor
- */
+  */
 
 const Router = () => {
     return (
@@ -28,6 +31,9 @@ const Router = () => {
                 <Route path={'vote_group'} element={<VoteGroup />}></Route>
                 <Route path={'/dummy'} element={<ApiTestDummyPage/>}></Route>
                 <Route path={'/kakaoLogin'} element={<KakaoLogin/>}></Route>
+                <Route path={'/rank'} element={<RankPage />}></Route>
+                <Route path={'/personalPage'} element={<PersonalPage />}></Route>
+                <Route path={'/myPage'} element={<MyPage />}></Route>
             </Route>
 
 

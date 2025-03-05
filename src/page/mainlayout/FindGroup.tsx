@@ -68,7 +68,7 @@ export default function FindGroup() {
         {view:'army', name:'육군'},
         {view:'navy', name:'해군'},
         {view:'airForce', name:'공군'},
-        {view:'marine', name:'marine'},
+        {view:'marine', name:'해병대'},
     ]
 
     const moveToChildrenView = (view:ViewType) => {
@@ -76,7 +76,6 @@ export default function FindGroup() {
     }
 
     // main 화면 컴포넌트
-    // ddd
     const MainView = () => (
         <FindWrapper>
             <ChoiceContainer>
@@ -95,8 +94,8 @@ export default function FindGroup() {
         <FindWrapper>
             <ChoiceContainer>
                 {
-                    armyGroupList.map((rootView) => (
-                        <FirstChoiceBtn onClick={ ()=>{moveToChildrenView(rootView.view)}} key={rootView.view}>{rootView.name}</FirstChoiceBtn>
+                    armyGroupList.map((armyView) => (
+                        <FirstChoiceBtn onClick={ ()=>{moveToChildrenView(armyView.view)}} key={armyView.view}>{armyView.name}</FirstChoiceBtn>
                     ))
                 }
             </ChoiceContainer>
