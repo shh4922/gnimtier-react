@@ -2,7 +2,7 @@ import {useMutation, useQuery} from "@tanstack/react-query";
 import {getWithToken, postWithToken} from "@/api/http";
 import {Summoner} from "@/api/user/model.tft";
 
-export const useFetchRiotInfo = (userId:string|undefined) => {
+export const useFetchRiotInfo = (userId:string|undefined|null) => {
     return useQuery({
         queryFn: () => getWithToken<{ summoner:Summoner }>(`users/${userId}/riot/summoners`),
         queryKey: ["riotInfo",userId],

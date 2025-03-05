@@ -1,5 +1,5 @@
-import axios, {AxiosHeaders} from "axios";
-import {authResponse, fetchRefreshToken} from "@/api/auth/auth";
+import axios from "axios";
+import { fetchRefreshToken} from "@/api/auth/auth";
 import {removeToken, setTokenInLocal} from "@/utils/token";
 
 /**

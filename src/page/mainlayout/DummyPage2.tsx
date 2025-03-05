@@ -1,9 +1,10 @@
-import { useFetchGroupList, useFetchGroupsUserByGroupId } from "@/api/group/group";
+import {leaveGroup, useFetchGroupList, useFetchGroupsUserByGroupId} from "@/api/group/group";
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { tftUserInfo } from "@/api/user/model.tft";
 import Tier from "@/common/Tier";
 import {useFetchMyProfile} from "@/api/user/user";
+import {Link} from "react-router-dom";
 
 /**
  * 최적화 필요. 불필요한 렌더링이 한번 일어나는것 같음
@@ -71,16 +72,26 @@ const DummyPage2 = () => {
     }
 
 
-
     if (!firstGroupId) {
-        console.log("내가 속한 그룹 없음");
-        console.log(groupUserResponse);
         return <div>속한 그룹이 없습니다. 그룹 가입 페이지로 이동하세요.</div>;
+    }
+
+    const leaveMyGroup = async () => {
+        const res = await leaveGroup(firstGroupId)
+        console.log(res)
     }
 
     return (
         <div>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                <Link to="/dummy">더미1</Link>
+                <Link to="/dummy2">더미2</Link>
+                <Link to="/dummy3">더미3</Link>
+                <Link to="/dummy4">더미4</Link>
+                <Link to="/dummy5">더미5</Link>
+            </div>
             <h1>내가 속한 그룹 중 첫 번째 그룹: {groupData?.groups[0].name}</h1>
+            <button onClick={leaveMyGroup}>탈퇴하기</button>
             <ul>
                 {groupUserList.map((user, index) => (
                     <li key={user.summoner.id}>
@@ -102,7 +113,7 @@ const DummyPage2 = () => {
                     </li>
                 ))}
                 {isUserLoading && <div>그룹 내부 유저들 가져오는 중...</div>}
-                <div ref={observerTargetRef} style={{ height: "10px" }}></div>
+                <div ref={observerTargetRef} style={{height: "10px"}}></div>
             </ul>
         </div>
     );

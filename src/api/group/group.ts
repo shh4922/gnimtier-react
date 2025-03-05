@@ -1,6 +1,7 @@
-import {get, getWithToken, postWithToken} from "@/api/http";
+import {deleteWithToken, get, getWithToken, postWithToken} from "@/api/http";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {tftUserInfoResponse} from "@/api/user/model.tft";
+import axios from "axios";
 
 export interface Group {
     id: string;
@@ -61,7 +62,13 @@ export const useMutateJoinGroup = () => {
         onSuccess: (data) => {
             return data
         },
-        onError: (err) => {}
+        onError: (err) => {
+            return err
+        }
     });
 };
+
+export const leaveGroup = (groupId: string) => {
+    return deleteWithToken(`/groups/${groupId}`)
+}
 

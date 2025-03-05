@@ -2,6 +2,7 @@ import {getWithToken} from "@/api/http";
 import {Me, Summoner, tftUserInfoResponse, User} from "@/api/user/model.tft";
 import axios from "axios";
 import {useQuery} from "@tanstack/react-query";
+import {useEffect} from "react";
 
 
 /**
@@ -95,6 +96,7 @@ export function checkRiotAccount(puuid:string) {
 
 
 export const useFetchMyProfile = () => {
+
     return useQuery({
         queryFn: () => getWithToken<{ user:User }>('users/me'),
         queryKey: ["me"],
@@ -102,6 +104,7 @@ export const useFetchMyProfile = () => {
         staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
         // retry:2,
         refetchOnWindowFocus: false, // 윈도우 탭 전환시, 다시 패치 false
+
     })
 }
 
