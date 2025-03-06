@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 import RankGroup from "@/components/Rank/RankGroup";
+import RankStream from "@/components/Rank/RankStream";
 
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -11,8 +12,6 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-
 `;
 
 const SeeMoreBtn = styled.button`
@@ -28,19 +27,18 @@ const SeeMoreBtn = styled.button`
 `;
 
 export default function RankPage() {
-    const [showMore, setShowMore] = useState(false);
+    
+    const navigate = useNavigate();
 
-    const handleShowMore = () => {
-        setShowMore(!showMore);
+    const handleSeeMore = () => {
+        navigate('/seeMoreRank');
     }
 
     return (
         <Wrapper>
-            <RankGroup showMore={showMore} groupName="56동원지원단" />
-            <SeeMoreBtn onClick={handleShowMore}>
-                {showMore ? "간략히 보기" : "더보기 +"}
-            </SeeMoreBtn>
-            <RankGroup showMore={showMore} groupName="스트리머" />
+            <RankGroup groupName="56동원지원단" />
+            <SeeMoreBtn onClick={handleSeeMore}>더보기 +</SeeMoreBtn>
+            <RankStream />
         </Wrapper>
     );
 }

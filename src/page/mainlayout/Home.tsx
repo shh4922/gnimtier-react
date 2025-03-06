@@ -10,7 +10,7 @@ const MobileContainer = styled.div`
 `;
 
 const Wrapper = styled.div`
-    height: 100vh;
+    height: 85vh;
     min-height: -webkit-fill-available;   /* for iOS */
     display: flex;
     flex-direction: column;
@@ -60,7 +60,10 @@ export default function Home() {
                     <ViewPage onClick= {() => navigate('/rank') }>
                         랭킹 페이지
                     </ViewPage>
-                    <ViewPage onClick= {() => navigate('/MyPage') }>
+                    <ViewPage onClick= {() => navigate('/personalPage') }>
+                        개인 페이지
+                    </ViewPage>
+                    <ViewPage onClick= {() => navigate('/myPage') }>
                         마이 페이지
                     </ViewPage>
                 </Content>

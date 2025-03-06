@@ -1,12 +1,14 @@
 import styles from './css/RankGroup.module.css';
 
+import RankItem from './RankItem';
+
 interface RankGroupProps {
-    showMore: boolean;
     groupName: string;
+    showAll?: boolean; // 전체 데이터 표시 여부를 결정하는 props
 }
 
 
-export default function RankGroup({ showMore, groupName }: RankGroupProps) {
+export default function RankGroup({ groupName, showAll = false }: RankGroupProps) {
 
     const rankData = [
         { rank: 1, name: "똥지단페이커", tier: "Dia", point: 180, winRate: "승률?" },
@@ -20,32 +22,21 @@ export default function RankGroup({ showMore, groupName }: RankGroupProps) {
         
     ];
 
-    // showMore이 ture면 전체 데이터, false면 5개만 보여줌.
-    const displayData = showMore ? rankData : rankData.slice(0, 4);
+    const displayData = showAll ? rankData : rankData.slice(0, 4);
 
     return (
         <div className={styles.container}>
             <div className={styles.rankTitle}>{groupName} 랭킹</div>
             <div className={styles.rankContainer}>
                 {displayData.map((item) => (
-                    <div key={item.rank} className={styles.rankItem}>
-                        <div className={styles.rowOne}>{item.rank}등</div>     {/* 1 */}
-                        <div className={styles.rowTwo}>                   {/* 2 */}
-                            <div>프사</div>
-                            <div>{item.name}</div>
-                        </div>
-                        <div className={styles.rowThree}>                {/* 3 */}
-                            <div className={styles.tierAndPoint}>
-                                <div>img</div>
-                                <div className={styles.tierAndPointText}>
-                                    <span>{item.tier}</span>
-                                    <span>{item.point}LP</span>
-                                </div>
-                            </div>
-                            <div className={styles.winRateBox}>{item.winRate}</div>
-                        </div>
-
-                    </div>
+                    <RankItem 
+                        key={item.rank}
+                        rank={item.rank}
+                        name={item.name}
+                        tier={item.tier}
+                        point={item.point}
+                        winRate={item.winRate}
+                    />
                 ))}
             </div>
             

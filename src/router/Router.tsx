@@ -5,6 +5,7 @@ import Home from "@/page/mainlayout/Home";
 import FindGroup from "@/page/mainlayout/FindGroup";
 import VoteGroup from "@/page/mainlayout/VoteGroup";
 import RankPage from "@/page/mainlayout/RankPage";
+import SeeMoreRank from "@/page/SeeMoreRank";
 import PersonalPage from "@/page/mainlayout/PersonalPage";
 import MyPage from "@/page/mainlayout/MyPage";
 
@@ -32,6 +33,7 @@ const Router = () => {
                 <Route path={'/dummy'} element={<ApiTestDummyPage/>}></Route>
                 <Route path={'/kakaoLogin'} element={<KakaoLogin/>}></Route>
                 <Route path={'/rank'} element={<RankPage />}></Route>
+                <Route path={'/seeMoreRank'} element={<SeeMoreRank />}></Route>
                 <Route path={'/personalPage'} element={<PersonalPage />}></Route>
                 <Route path={'/myPage'} element={<MyPage />}></Route>
             </Route>
