@@ -10,7 +10,7 @@ const MobileContainer = styled.div`
 `;
 
 const Wrapper = styled.div`
-    height: 85vh;
+    height: 100vh;
     min-height: -webkit-fill-available;   /* for iOS */
     display: flex;
     flex-direction: column;
