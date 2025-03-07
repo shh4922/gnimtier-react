@@ -57,6 +57,15 @@ export default function Home() {
                     <ViewPage onClick={() => navigate('/vote_group')}>
                         그룹 만들어주세요 & 투표 페이지
                     </ViewPage>
+                    <ViewPage onClick= {() => navigate('/rank') }>
+                        랭킹 페이지
+                    </ViewPage>
+                    <ViewPage onClick= {() => navigate('/personalPage') }>
+                        개인 페이지
+                    </ViewPage>
+                    <ViewPage onClick= {() => navigate('/myPage') }>
+                        마이 페이지
+                    </ViewPage>
                 </Content>
 
 
