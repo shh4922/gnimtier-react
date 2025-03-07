@@ -56,13 +56,13 @@ export default function Home() {
                     </ViewPage>
                     <ViewPage onClick={() => navigate('/vote_group')}>
                         그룹 만들어주세요 & 투표 페이지
-                    </ViewPage> 
+                    </ViewPage>
                 </Content>
-            
-            
+
+
             </Wrapper>
         </MobileContainer>
-        
+
     );
 };
 

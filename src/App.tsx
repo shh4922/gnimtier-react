@@ -8,7 +8,7 @@ function App() {
       <GlobalStyle />
       <Router></Router>
     </>
-    
+
   )
 }
 
