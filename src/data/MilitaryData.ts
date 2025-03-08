@@ -1,8 +1,6 @@
 import { MilitaryData } from "@/types/MilitaryType";
 
-// html을 리턴하지 않는 파일은 tsx가 아니라 ts파일로 저장한다.
-
-export const militaryData: MilitaryData = {  // 구조 이상함 재조정 필요
+export const militaryData: MilitaryData = {
     army: {
         name: '육군',
         divisions: [
