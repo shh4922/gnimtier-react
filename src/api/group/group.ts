@@ -1,7 +1,7 @@
 import {deleteWithToken, get, getWithToken, postWithToken} from "@/api/http";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {tftUserInfoResponse} from "@/api/user/model.tft";
-import axios from "axios";
+import {tftUserInfo, tftUserInfoResponse} from "@/api/user/model.tft";
+
 
 export interface Group {
     id: string;
@@ -10,12 +10,36 @@ export interface Group {
     parentId: string;
     isOfficial: boolean;
     isJoinable: boolean;
+    userCount: number;
+    rank:number;
 }
+
+export interface PendingGroup {
+    id: string;
+    name: string;
+    description:string
+    voteCount: number
+    createdAt :string
+}
+
+
+export interface PendingGroupResponse {
+    groups: {
+        data: PendingGroup[];
+        sortBy: string|null;
+        pageSize: number;
+        totalPages: number;
+        totalElements: number;
+        hasNext : boolean;
+        hasPrevious : boolean;
+    }
+}
+
 export interface GroupListResponse {
     groups: Group[];
 }
 
-export const useFetchGroupList = (userId:string|undefined) => {
+export const useFetchGroupList = (userId:string|undefined|null) => {
     return useQuery({
         queryKey: ['groupList'],
         queryFn: () => getWithToken<GroupListResponse>(`/users/${userId}/groups`),
@@ -39,6 +63,27 @@ export const useFetchGroupsUserByGroupId = (groupId?: string, page=0) => {
         // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
         // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
         enabled: !!groupId, // groupId가 있을 때만 실행
+    });
+};
+
+/**
+ * 투표중인 그룹
+ * @param groupId
+ * @param page
+ */
+export const useFetchPendingGroups = (page=0) => {
+    const params = {
+        "sortBy": "voteCount",
+        "page" : `${page}`
+    }
+    return useQuery({
+        queryKey: ['pendingGroup', page],
+    queryFn: () => getWithToken<PendingGroupResponse>('/groups/pending', {
+            params: params
+        }),
+        // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
+        // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
+        // enabled: !!groupId, // groupId가 있을 때만 실행
     });
 };
 
@@ -67,6 +112,16 @@ export const useMutateJoinGroup = () => {
         }
     });
 };
+
+export const postJoinGroup = (groupId: string) => {
+    return postWithToken(`/groups/${groupId}`)
+}
+
+export const voteGroup = (groupId: string) => {
+    return postWithToken(`/groups/pending/${groupId}`)
+}
+
+
 
 export const leaveGroup = (groupId: string) => {
     return deleteWithToken(`/groups/${groupId}`)

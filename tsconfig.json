@@ -16,7 +16,9 @@
     "noEmit": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noEmitOnError": false,
+
   },
   "include": ["src"]
 }

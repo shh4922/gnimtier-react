@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  max-width: 100%; // 💡 부모 너비를 초과하지 않도록 설정
+  box-sizing: border-box; // 💡 패딩 포함한 크기 유지
+  border-bottom: 1px solid #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+
+    font-family: 'title-font', sans-serif;
+    font-size: 3rem;
+    //font-family: TitleFont;
+  }
+}
+
+
+
+.header-nav {
+  display: flex;
+  gap: 1rem;
+  //background-color: red;
+  font-size: 3rem;
+  align-items: center;
+
+  .profile-img {
+    width: 40px;  /* 원하는 크기로 설정 */
+    height: 40px; /* 정사각형 유지 */
+    border-radius: 50%; /* 원형 */
+    object-fit: cover; /* 이미지가 찌그러지지 않게 */
+  }
+  p {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,59 @@
+.findGroupContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box; // 💡 패딩 포함한 크기 유지
+
+  .vote {
+    margin-top: 1rem;
+    width: 100%;
+    outline: none;
+    font-size: 2rem;
+    border: 0.2rem solid #242424;
+    font-family: 'title-font', sans-serif;
+    padding: 1rem 0;
+    border-radius: 0.5rem;
+    color: #242424;
+    display: block;
+    text-align: center;
+
+  }
+
+  .joinBox {
+    width: 100%;
+    max-width: 25rem;
+    justify-content: center;
+    //background-color: green;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    span {
+      font-size: 1.5rem;
+      color: red;
+      font-family: 'title-font', sans-serif;
+    }
+  }
+
+  button {
+    padding: 1rem;
+    width: 13rem;
+    font-size: 2rem;
+    font-family: 'title-font', sans-serif;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #A47764;
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.noGroup {
+  font-family: "title-font", sans-serif;
+  font-size: 2rem;
+  width: 100%;
+  text-align: center;
+}

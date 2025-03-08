@@ -1,0 +1,30 @@
+.rsoContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
+  h2 {
+    font-size: 3.5rem;
+    font-family: "title-font", sans-serif;
+  }
+
+  input {
+    margin-top: 1rem;
+    padding: 2rem;
+    font-size: 2rem;
+    border: none;
+  }
+
+  button {
+    margin-top: 2rem;
+    border: none;
+    background-color: red;
+    color: white;
+    font-family: "title-font" , sans-serif;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+  }
+}

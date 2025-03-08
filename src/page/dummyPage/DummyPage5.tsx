@@ -28,7 +28,7 @@ const DummyPage5 = () => {
     const postRiotAccount = async () => {
         const result = await refetch()
         if(result.isError && !result.data) { return }
-        const puuid = result.data?.summoner.puuid
+        const puuid = result.data?.summoners.puuid
 
         mutate(
             {puuid},

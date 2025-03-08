@@ -1,8 +1,6 @@
-import GlobalStyle from "./GlobalStyle.tsx";
 import Router from "./router/Router.tsx";
 import {useEffect} from "react";
-
-
+import "./App.css"
 function App() {
 
     useEffect(() => {
@@ -14,10 +12,9 @@ function App() {
         }
     }, []);
   return (
-    <>
-      <GlobalStyle />
+    <div className="App">
       <Router></Router>
-    </>
+    </div>
   )
 }
 

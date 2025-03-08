@@ -4,7 +4,7 @@ import {Summoner} from "@/api/user/model.tft";
 
 export const useFetchRiotInfo = (userId:string|undefined|null) => {
     return useQuery({
-        queryFn: () => getWithToken<{ summoner:Summoner }>(`users/${userId}/riot/summoners`),
+        queryFn: () => getWithToken<{ summoners:Summoner }>(`users/${userId}/riot/summoners`),
         queryKey: ["riotInfo",userId],
         // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
         // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭

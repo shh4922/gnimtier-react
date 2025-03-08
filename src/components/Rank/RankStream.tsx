@@ -1,6 +1,6 @@
 import styles from './css/RankGroup.module.css';
 
-import RankItem from './RankItem';
+import MainRankCell from './MainRankCell';
 
 
 
@@ -20,7 +20,7 @@ export default function RankStream() {
             <div className={styles.rankTitle}>스트리머 랭킹</div>
             <div className={styles.rankContainer}>
                 {displayData.map((item) => (
-                    <RankItem 
+                    <MainRankCell
                         key={item.rank}
                         rank={item.rank}
                         name={item.name}
@@ -30,7 +30,7 @@ export default function RankStream() {
                     />
                 ))}
             </div>
-            
+
         </div>
     );
 }

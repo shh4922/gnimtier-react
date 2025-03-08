@@ -1,6 +1,6 @@
 import styles from './css/RankGroup.module.css';
 
-import RankItem from './RankItem';
+import MainRankCell from './MainRankCell';
 
 interface RankGroupProps {
     groupName: string;
@@ -19,7 +19,7 @@ export default function RankGroup({ groupName, showAll = false }: RankGroupProps
         { rank: 6, name: "23페이커", tier: "Dia", point: 106, winRate: "승률?" },
         { rank: 7, name: "9페이커", tier: "Master", point: 806, winRate: "승률?" },
         { rank: 8, name: "16페이커", tier: "Dia", point: 6, winRate: "승률?" },
-        
+
     ];
 
     const displayData = showAll ? rankData : rankData.slice(0, 4);
@@ -29,7 +29,7 @@ export default function RankGroup({ groupName, showAll = false }: RankGroupProps
             <div className={styles.rankTitle}>{groupName} 랭킹</div>
             <div className={styles.rankContainer}>
                 {displayData.map((item) => (
-                    <RankItem 
+                    <MainRankCell
                         key={item.rank}
                         rank={item.rank}
                         name={item.name}
@@ -39,7 +39,7 @@ export default function RankGroup({ groupName, showAll = false }: RankGroupProps
                     />
                 ))}
             </div>
-            
+
         </div>
     );
 }

@@ -3,3 +3,4 @@ export declare const get: <T>(url: string, config?: AxiosRequestConfig) => Promi
 export declare const post: <T>(url: string, data?: object, config?: AxiosRequestConfig) => Promise<T>;
 export declare const getWithToken: <T>(url: string, config?: AxiosRequestConfig) => Promise<T>;
 export declare const postWithToken: <T>(url: string, data?: object, config?: AxiosRequestConfig) => Promise<T>;
+export declare const deleteWithToken: <T>(url: string, config?: AxiosRequestConfig) => Promise<T>;
