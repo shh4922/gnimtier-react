@@ -1,9 +1,9 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+//  "files": [],
+//  "references": [
+//    { "path": "./tsconfig.app.json" },
+//    { "path": "./tsconfig.node.json" }
+//  ],
 
   /* 파일 import 시, 기본경로를 src로 잡기위한 설정*/
   "compilerOptions": {
@@ -19,6 +19,13 @@
     "resolveJsonModule": true,
     "noEmitOnError": false,
 
+    "target": "ESNEXT", // ECMAScript 목표 버전 설정 es5, es6 ... 인듯.
+    "jsx": "react-jsx",  /* 생성될 JSX 코드 설정: 'preserve', 'react-native', or 'react'. 리엑트 17이상부터는 react-jsx */
+    "allowImportingTsExtensions": true, // ts 확장자 임포트 가능하도록 설정
+
+    "module": "ESNext",
+    "strict": true,
+    "lib": ["DOM", "ESNext"], // "DOM" 없으면 JSX파일 인식못함. 라이브러리에 jsx로 된거 있음 그래서 설정안하면 에러남
   },
   "include": ["src"]
 }

@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import {defineConfig} from "vite";
 import * as path from "node:path";
 
 /** 절대경로 설정을 위해 설치한 라이브러리 */

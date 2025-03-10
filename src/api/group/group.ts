@@ -1,6 +1,6 @@
 import {deleteWithToken, get, getWithToken, postWithToken} from "@/api/http";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {tftUserInfo, tftUserInfoResponse} from "@/api/user/model.tft";
+import { tftUserInfoResponse} from "@/api/user/model.tft";
 
 
 export interface Group {

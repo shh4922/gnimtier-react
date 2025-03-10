@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {removeToken, setTokenInLocal} from "@/utils/token";
 import useUserStore from "@/store/userStore";
 import {fetchMyInfo} from "@/api/user/user";
 import {fetchTokenWithKakaoCode} from "@/api/auth/auth";
-import {useLocation, useNavigate, useNavigation, useParams} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 /**
  * 응답형식 DefaultResponse로 바꾸고 나면 다시 바꿔야함.

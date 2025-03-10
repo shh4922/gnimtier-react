@@ -44,7 +44,7 @@ const VoteGroupPage = () => {
         const isTrue = confirm(`너 그룹투표하면 1시간 다른곳 투표못함 \n 진짜 ${group.name}얘 투표할거임?`)
         if (isTrue) {
             try {
-                const res = await voteGroup(group.id)
+                const res = await voteGroup(group.id) as {status:string}
                 if(res.status === "ACCEPTED") {
                     alert("투표완료")
                 }

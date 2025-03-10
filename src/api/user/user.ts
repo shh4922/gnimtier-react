@@ -2,7 +2,6 @@ import {getWithToken} from "@/api/http";
 import {Me, Summoner, tftUserInfoResponse, User} from "@/api/user/model.tft";
 import axios from "axios";
 import {useQuery} from "@tanstack/react-query";
-import {useEffect} from "react";
 
 
 /**

@@ -1,5 +1,5 @@
 import styles from './findGroup.module.scss';
-import {createSearchParams, Link, useLocation, useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {createSearchParams, Link, useLocation, useNavigate} from "react-router-dom";
 import {Group, postJoinGroup, useFetchGroupByParentId} from "@/api/group/group";
 import {useEffect} from "react";
 import qs from 'qs'
@@ -8,7 +8,7 @@ export default function FindGroup() {
     const location = useLocation();
     const navigate = useNavigate();
     const query = qs.parse(location.search, { ignoreQueryPrefix: true });
-    const {data:groupList} = useFetchGroupByParentId(query.groupId);
+    const {data:groupList} = useFetchGroupByParentId(query.groupId as string);
 
 
     function clickGroup(group:Group) {
@@ -19,7 +19,7 @@ export default function FindGroup() {
             joinGroup(group.id)
         }else {
             navigate({
-             path:'findGroup',
+             pathname:'findGroup',
              search: createSearchParams({
                  groupId: group.id
              }).toString()
@@ -29,7 +29,7 @@ export default function FindGroup() {
 
     async function joinGroup(groupId:string) {
         try {
-            const res = await postJoinGroup(groupId);
+            const res = await postJoinGroup(groupId) as {status:string};
             if(res.status === "ACCEPTED" ) {
                 alert("가입했음 추카야")
             }
