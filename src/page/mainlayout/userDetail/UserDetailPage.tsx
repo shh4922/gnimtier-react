@@ -2,24 +2,26 @@ import {useFetchUserProfile} from "@/api/user/user";
 import {useFetchRiotInfo} from "@/api/riot/riot";
 import {useParams} from "react-router-dom";
 import styles from "./UserDetail.module.scss"
-// import styles from "@/components/Rank/css/RankItem.module.scss";
+// import styles from "@/components/Rank/css/mainRankCell.module.scss";
 import Tier from "@/common/Tier";
 import {useFetchGroupList} from "@/api/group/group";
 
 const UserDetailPage = () => {
     const params = useParams();
     const tier = new Tier()
-    const {data:userInfo, isSuccess:userSuccess} = useFetchUserProfile(params.userId);
-    const {data:riotInfo, isSuccess:riotSuccess} = useFetchRiotInfo(params.userId)
-    const {data: groupList, isSuccess:groupSuccess} = useFetchGroupList(params.userId);
+    const {data:userInfo } = useFetchUserProfile(params.userId);
+    const {data:riotInfo } = useFetchRiotInfo(params.userId)
+    const {data: groupList } = useFetchGroupList(params.userId);
 
     function updateUserInfo(){
         alert("아직 준비중임..ㅈㅅ요..")
     }
 
-    if(!userSuccess || !riotSuccess || !groupSuccess) {
-        return <div>정보를 가져오는데 실패했슴다;</div>
+
+    if(!userInfo || !riotInfo || !groupList) {
+        return null
     }
+
     return (
         <div className={styles.userDetailContainer}>
 

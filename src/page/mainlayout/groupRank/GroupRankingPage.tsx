@@ -4,7 +4,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 import MainRankCell from "@/components/Rank/MainRankCell";
 import {tftUserInfo} from "@/api/user/model.tft";
-
+import {motion} from "framer-motion";
 /**
  * url파람으로 groupId 받아와야함.
  * @constructor
@@ -54,16 +54,31 @@ const GroupRankingPage = () => {
 
     return (
         <div className={styles.groupRankContainer}>
-            {/*<h1>내가 속한 그룹 중 첫 번째 그룹: {groupData?.groups[0].name}</h1>*/}
-            {/*<button onClick={leaveMyGroup}>탈퇴하기</button>*/}
-            <ul>
+            <ul >
                 {groupUserList?.map((user, index) => (
-                    <MainRankCell userId={user.user.id} rank={index} profileImageUrl={user.user.profileImageUrl} gameName={user.summoner.gameName} tier={user.summoner.entry.RANKED_TFT.tier} point={user.summoner.entry.RANKED_TFT.leaguePoints} win={user.summoner.entry.RANKED_TFT.wins} lose={user.summoner.entry.RANKED_TFT.losses} key={index}/>
+                    <motion.div
+                        key={user.user.id}
+                        initial={{opacity: 0, y: 10}}
+                        animate={{opacity: 1, y: 0}}
+                        transition={{duration: 0.3}}
+                    >
+                        <MainRankCell
+                            userId={user.user.id}
+                            rank={index}
+                            profileImageUrl={user.user.profileImageUrl}
+                            gameName={user.summoner.gameName}
+                            tier={user.summoner.entry.RANKED_TFT.tier}
+                            point={user.summoner.entry.RANKED_TFT.leaguePoints}
+                            win={user.summoner.entry.RANKED_TFT.wins}
+                            lose={user.summoner.entry.RANKED_TFT.losses}
+                        />
+                    </motion.div>
                 ))}
-                {isUserLoading && <div>그룹 내부 유저들 가져오는 중...</div>}
-                <div ref={observerTargetRef} style={{height: "10px"}}></div>
+                <div ref={observerTargetRef} style={{height: "60px", visibility: "hidden"}}></div>
             </ul>
         </div>
+        // <div className={styles.groupRankContainer}>
+
     );
 };
 

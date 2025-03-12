@@ -19,7 +19,7 @@ export default function FindGroup() {
             joinGroup(group.id)
         }else {
             navigate({
-             pathname:'findGroup',
+             pathname:'/findGroup',
              search: createSearchParams({
                  groupId: group.id
              }).toString()

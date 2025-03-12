@@ -41,7 +41,7 @@ export interface GroupListResponse {
 
 export const useFetchGroupList = (userId:string|undefined|null) => {
     return useQuery({
-        queryKey: ['groupList'],
+        queryKey: ['groupList', userId],
         queryFn: () => getWithToken<GroupListResponse>(`/users/${userId}/groups`),
         // gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
         // staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭

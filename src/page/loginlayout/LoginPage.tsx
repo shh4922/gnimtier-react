@@ -3,7 +3,8 @@ const LoginPage = () => {
 
     function goToKakaoLogin(){
         window.Kakao.Auth.authorize({
-            redirectUri: "https://api.xn--2i0bm6giy8a.kr/kakaologin",
+            // redirectUri: "https://dev.xn--2i0bm6giy8a.kr/kakaologin",
+            redirectUri: "http://localhost:5173/kakaologin",
         })
     }
 

@@ -1,4 +1,4 @@
-import styles from './css/RankItem.module.scss';
+import styles from './mainRankCell.module.scss';
 import Tier from "@/common/Tier";
 import {useNavigate} from "react-router-dom";
 

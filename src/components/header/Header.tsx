@@ -12,6 +12,7 @@ export default function Header () {
 
     function goToKakaoLogin(){
         window.Kakao.Auth.authorize({
+            // redirectUri: "https://dev.xn--2i0bm6giy8a.kr/kakaologin",
             redirectUri: "http://localhost:5173/kakaologin",
         })
     }
@@ -26,6 +27,10 @@ export default function Header () {
         }
     }, [user])
 
+    function moveToMyPage(){
+        navigate('/myPage')
+    }
+
     return (
         <header className="header">
             <h1 onClick={()=>{navigate('/')}}>ㄱㄴㅌ?</h1>
@@ -35,8 +40,7 @@ export default function Header () {
                 <IoMdSearch onClick={moveToFindGroup}/>
                 {user ? (
                     <>
-                        <img src={user.user.profileImageUrl} className={"profile-img"}/>
-
+                        <img src={user.user.profileImageUrl} className={"profile-img"} alt={'사용자 이미지'} onClick={moveToMyPage}/>
                     </>
                 ) : (
                     <button onClick={goToKakaoLogin}>정보없음. 로그인하러가셈</button>

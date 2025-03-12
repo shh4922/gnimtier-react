@@ -14,6 +14,7 @@ import GroupRankingPage from "@/page/mainlayout/groupRank/GroupRankingPage";
 import UserDetailPage from "@/page/mainlayout/userDetail/UserDetailPage";
 import RsoPage from "@/page/mainlayout/rso/RsoPage";
 import VoteGroupPage from "@/page/mainlayout/voteGroup/VoteGroupPage";
+import MyPage from "@/page/mainlayout/mypage/MyPage.tsx";
 
 const Router = () => {
     return (
@@ -22,6 +23,7 @@ const Router = () => {
                 <Route path={''} element={<Home/>}></Route>
                 <Route path={'group/:groupId'} element={<GroupRankingPage/>}></Route>
                 <Route path={'findGroup'} element={<FindGroup />}></Route>
+                <Route path={'myPage'} element={<MyPage />}></Route>
                 <Route path={'rso'} element={<RsoPage />}></Route>
                 <Route path={'voteGroup'} element={<VoteGroupPage />}></Route>
                 <Route path={'profile/:userId'} element={<UserDetailPage />}></Route>

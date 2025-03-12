@@ -1,0 +1,144 @@
+.mypageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  font-family: 'title-font', sans-serif;
+  gap: 3rem;
+
+  h2 {
+    font-size: 3.5rem;
+    margin: 0;
+  }
+
+  .userName {
+    font-size: 2.5rem;
+    border: 1px solid gray;
+    border-radius: 0.7rem;
+    padding: 1rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+
+  .riotInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    h3 {
+      font-size: 2.4em;
+      //background-color: red;
+      margin: 0;
+    }
+
+    img {
+      width: 60px;  /* 원하는 크기로 설정 */
+      height: 60px; /* 정사각형 유지 */
+      border-radius: 50%; /* 원형 */
+      object-fit: cover; /* 이미지가 찌그러지지 않게 */
+      display: block;
+    }
+
+
+    .tftInfo {
+      //background-color: red;
+      //background-color: #242424;
+      display: flex;
+      border: 0.5rem solid gray;
+      align-items: center;
+      padding: 1rem;
+      gap: 1rem;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      border-radius: 0.7rem;
+      //.riotIcon {
+      //  width: 10%;
+      //  object-fit: cover; /* 이미지가 찌그러지지 않게 */
+      //  display: block;
+      //  background-color: white;
+      //}
+
+      .tierInfo {
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        //background-color: gray;
+        align-items: center;
+        span {
+          font-size: 1.5rem;
+        }
+      }
+      .riotUserInfo {
+        flex : 1;
+        display: flex;
+        flex-direction: column;
+        //background-color: #242424;
+
+        span {
+          font-size: 1.5rem;
+        }
+        .rate {
+          display: flex;
+          gap: 1rem;
+        }
+        //background-color: whitesmoke;
+      }
+    }
+  }
+
+  .groupContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    //background-color: red;
+    h3 {
+      font-size: 2.4rem;
+      margin: 0;
+    }
+    .groupList {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+    .group {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2rem;
+      align-items: center;
+      height: 8rem;
+      border: 0.4rem solid #242424;
+      font-size: 2rem;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      border-radius: 0.7rem;
+
+      button {
+        border: none;
+        background-color: red;
+        font-size: 1.4rem;
+        color: white;
+        padding: 1rem;
+        border-radius: 0.7rem;
+        font-family: "title-font" , sans-serif;
+      }
+    }
+
+    .noGroup {
+      font-size: 2rem;
+    }
+  }
+
+  .authRiot {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    h3 {
+      font-size: 2.5rem;
+    }
+    a {
+      background-color: red;
+      padding: 2rem ;
+      text-align: center;
+      font-size: 2rem;
+      color: white;
+      border-radius: 0.7rem;
+    }
+  }
+}
