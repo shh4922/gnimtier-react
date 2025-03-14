@@ -1,69 +1,84 @@
 // import "./home.module.scss"
 import styles from './home.module.scss';
 import MainRankCell from "@/components/Rank/MainRankCell";
-import {useFetchGroupList, useFetchGroupsUserByGroupId} from "@/api/group/group";
+import {Group, useFetchGroupList, useFetchGroupsUserByGroupId} from "@/api/group/group";
 import useUserStore from "@/store/userStore";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {useFetchRiotInfo} from "@/api/riot/riot";
-
 
 export default function Home() {
     const navigate = useNavigate();
     const myInfo = useUserStore()
-    const { data: groupData, isSuccess:groupSuccess, isError:myGroupError, error } = useFetchGroupList(myInfo.userId);
-    const {data:riotInfo, isError:riotInfoError} = useFetchRiotInfo(myInfo.userId);
-    const firstGroupId = groupData?.groups[0]
+    const { data: groupData, isLoading:groupListLoading, isSuccess:groupSuccess, isError:myGroupError, error } = useFetchGroupList(myInfo.userId);
+    const [firstGroupId, setFirstGroup] = useState<string|null>(null)
 
-    const { data: groupUserResponse} = useFetchGroupsUserByGroupId(firstGroupId?.id, 0);
+    // const {data:riotInfo, isError:riotInfoError} = useFetchRiotInfo(myInfo.userId);
 
+    const { data: groupUserResponse, isSuccess:groupUserSuccess, isError:useGrouperror,error:error2} = useFetchGroupsUserByGroupId(firstGroupId ?? null, 0);
+
+    /** 로그인 안했을 경우 */
     useEffect(() => {
-        if(localStorage.getItem('a') === null) {
+        if(localStorage.getItem('a') === null && myInfo.userId === null) {
+            setFirstGroup("1")
+        }
+    },[])
+
+    /** 그룹데이터 없을경우 */
+    useEffect(() => {
+
+        // if(groupData === undefined) {
+        //     return;
+        // }
+        if(myInfo.userId !== null && groupSuccess && !groupListLoading) {
+            if(groupData?.groups.length === 0) {
+                console.log(groupData)
+                setFirstGroup("1")
+            } else {
+                setFirstGroup(groupData?.groups[0].id)
+            }
+        }
+    }, [groupData,groupSuccess]);
+
+
+
+    const moveToGroupList = (group:Group|null) => {
+        if((localStorage.getItem('a') === null || myInfo.userId === null) && window.location.pathname !== "/auth/login") {
             alert("로그인하셈")
             navigate("/auth/login");
+            return
         }
-    },[myInfo])
-
-
-    useEffect(() => {
-        if(myInfo.userId !== null && riotInfoError || riotInfo?.summoners === null ) {
-            alert("라이엇계정먼저 등록해줘야함..")
-            navigate("/auth/login");
-        }
-    },[myInfo])
-
-    useEffect(() => {
-        if(myInfo.userId !== null && riotInfo?.summoners !== null && groupSuccess && firstGroupId === undefined || firstGroupId === null) {
-            alert("그룹도 가입해줘야함..ㅋ")
+        if(groupData?.groups.length === 0) {
+            alert("그룹가입하셈")
             navigate('/findGroup?groupId=')
+            return
         }
-    },[groupData])
-
-
-
-    if(error) {
-        return <div>인증된 라이엇계정이 없음</div>
+        navigate(`/group/${group?.id}`)
     }
-
 
     return (
         <div className={styles.homeContainer}>
             {
-                myGroupError ? (
-                    <div>가입된 그룹없는데 그룹부터 가입하셈</div>
-                ) : (
+                groupUserSuccess && (
                     <>
-                        <p className={styles.rank}>{firstGroupId?.name} 랭킹</p>
+                        {
+                            groupData?.groups.length === 0 || myInfo.userId === null ? (
+                                <p className={styles.rank}>병신모임 랭킹</p>
+                            ) : (
+                                <p className={styles.rank}>{groupData?.groups[0].name} 랭킹</p>
+                            )
+                        }
+
                         {
                             groupUserResponse?.data.map((user,index) => {
-                                return <MainRankCell userId={user.user.id} rank={index} profileImageUrl={user.user.profileImageUrl} gameName={user.summoner.gameName} tier={user.summoner.entry.RANKED_TFT.tier} point={user.summoner.entry.RANKED_TFT.leaguePoints} win={user.summoner.entry.RANKED_TFT.wins} lose={user.summoner.entry.RANKED_TFT.losses} key={index}/>
+                                return <MainRankCell userId={user.user.id} rank={index} profileImageUrl={user.user.profileImageUrl} userName={user.user.nickname} gameName={user.summoner.gameName} tier={user.summoner.entry.RANKED_TFT.tier} point={user.summoner.entry.RANKED_TFT.leaguePoints} win={user.summoner.entry.RANKED_TFT.wins} lose={user.summoner.entry.RANKED_TFT.losses} key={index}/>
                             })
                         }
-                        <Link to={`/group/${groupData?.groups[0].id}`}>더보기 +</Link>
+                        <button onClick={()=>{moveToGroupList(groupData?.groups[0] ?? null)}}>더보기</button>
                     </>
                 )
+
+                // )
             }
         </div>
     );
 };
-

@@ -30,6 +30,16 @@ class Tier {
             default: return '/assets/bronze.png';
         }
     }
+
+    getRankToRoma(rank:number):string {
+        switch (rank) {
+            case 1: return 'I';
+            case 2: return 'II';
+            case 3: return 'III';
+            case 4: return 'IV';
+            default: return 'V';
+        }
+    }
 }
 
 export default Tier;

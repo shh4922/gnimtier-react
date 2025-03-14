@@ -9,19 +9,18 @@
     justify-content: center;
     width: 100%;
     margin-top: 1rem;
-    height: 15rem;
+    height: 18rem;
     //background-color: red;
     //border: 0.4rem solid #242424;
     padding: 1rem;
     box-sizing: border-box; // 💡 패딩 포함한 크기 유지
     //border-radius: 1rem;
-
-
+    gap: 1rem;
   }
 
 
   .rowTwo {
-    flex-basis: 40%; /* 전체 너비의 20% */
+    flex-basis: 30%; /* 전체 너비의 20% */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,20 +37,23 @@
     }
     span {
       box-sizing: border-box;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-family: "title-font", sans-serif;
       text-align: center;
-      max-width: 95%; /* 최대 너비 설정 */
+      max-width: 100%; /* 최대 너비 설정 */
       overflow: hidden; /* 너비를 넘어가면 숨김 */
       text-overflow: ellipsis; /* 글자가 넘어가면 줄임표(...) 표시 */
-      white-space: nowrap; /* 텍스트가 한 줄에 표시되도록 설정 */
-      display: inline-block; /* span을 블록 레벨 요소처럼 동작하도록 설정 (선택 사항) */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* 최대 2줄까지 표시 */
+      line-height: 1.4; /* 줄 간격 조정 */
+      word-break: break-word; /* 단어가 길 경우 줄바꿈 */
     }
   }
 
 
   .rowThree {
-    flex-basis: 60%; /* 전체 너비의 20% */
+    flex-basis: 70%; /* 전체 너비의 20% */
     display: flex;
     gap: 0.8rem;
     flex-direction: column;

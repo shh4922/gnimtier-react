@@ -21,7 +21,7 @@ const KakaoLogin = () => {
         // alert(`함수런함2 ${code}`)
         try {
             const res = await fetchTokenWithKakaoCode(code);
-            alert("~!~!")
+            alert("환영해유~~")
 
             removeToken()
             setTokenInLocal(res.tokens.access_token, res.tokens.refresh_token)
@@ -48,7 +48,7 @@ const KakaoLogin = () => {
 
         // alert(`카카오코드임 ${code}`)
         if(code === null || code=== undefined) {
-            alert("code없음")
+            alert("카카오코드가 없어용 에러임; ㅈㅅ;;")
         }
         getTokenWithCode(code)
     }, []);

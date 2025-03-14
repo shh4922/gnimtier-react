@@ -1,16 +1,16 @@
-// import {useFetchMyProfile} from "@/api/user/user.ts";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useFetchRiotInfo} from "@/api/riot/riot.ts";
 import useUserStore from "@/store/userStore.ts";
 import styles from "./mypage.module.scss";
 import Tier from "@/common/Tier.ts";
 import {Group, leaveGroup, postJoinGroup, useFetchGroupList} from "@/api/group/group.ts";
 import {useQueryClient} from "@tanstack/react-query";
+import {useEffect} from "react";
 const MyPage = () => {
+    const navigate = useNavigate();
     const userStore = useUserStore();
     const {data: myRiotInfo} = useFetchRiotInfo(userStore.userId)
     const {data: myGroupList, refetch} = useFetchGroupList(userStore.userId)
-    // const queryClient = useQueryClient();
     const tier = new Tier()
 
     async function getOut(group:Group) {
@@ -25,9 +25,14 @@ const MyPage = () => {
                 console.error(e)
             }
             refetch()
-            // queryClient.invalidateQueries(["groupList",userStore.userId]);
         }
     }
+    // useEffect(() => {
+    //     if(userStore.userId === null) {
+    //         alert("회원을 찾을수 없습니다 나가세요")
+    //         navigate("/")
+    //     }
+    // },[userStore])
 
     return (
         <div className={styles.mypageContainer}>
@@ -46,7 +51,11 @@ const MyPage = () => {
                                 <img
                                      src={`${tier.getTierImage(myRiotInfo?.summoners.entry.RANKED_TFT.tier)}`}
                                      alt={"티어 이미지"}/>
-                                <span>{tier.getTierName(myRiotInfo?.summoners.entry.RANKED_TFT.tier)}</span>
+                                <div>
+                                    <span>{tier.getTierName(myRiotInfo?.summoners.entry.RANKED_TFT.tier)}</span>
+                                    <span> {tier.getRankToRoma(myRiotInfo?.summoners.entry.RANKED_TFT.rank)}</span>
+                                </div>
+
                             </div>
 
                             <div className={styles.riotUserInfo}>
@@ -63,7 +72,7 @@ const MyPage = () => {
                 ) : (
                     <div className={styles.authRiot}>
                         <h3>라이엇 계정 인증하기</h3>
-                        <Link to={`/user/${userStore.username}`}>인증하러 가봅세</Link>
+                        <Link to={"/rso"}>인증하러 가봅세</Link>
                     </div>
                 )
             }

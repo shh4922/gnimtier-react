@@ -4,7 +4,7 @@ import styles from "./voteGroup.module.scss";
 const VoteGroupPage = () => {
     const [page, setPage] = useState<number>(0);
     const [pendingGroupList, setpendingGroupList] = useState<PendingGroup[]>([]);
-    const {data:pendingGroupResponse, isLoading} = useFetchPendingGroups(page)
+    const {data:pendingGroupResponse, refetch, isLoading} = useFetchPendingGroups(page)
     const [hasNext, setHasNext] = useState<boolean>(false);
 
     const observerRef = useRef<IntersectionObserver | null>(null);
@@ -47,6 +47,7 @@ const VoteGroupPage = () => {
                 const res = await voteGroup(group.id) as {status:string}
                 if(res.status === "ACCEPTED") {
                     alert("투표완료")
+                    // refetch()
                 }
             } catch (e) {
                 console.error(e)

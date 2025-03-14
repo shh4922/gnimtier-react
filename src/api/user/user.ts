@@ -1,4 +1,4 @@
-import {getWithToken} from "@/api/http";
+import {deleteWithToken, getWithToken} from "@/api/http";
 import {Me, Summoner, tftUserInfoResponse, User} from "@/api/user/model.tft";
 import axios from "axios";
 import {useQuery} from "@tanstack/react-query";
@@ -101,7 +101,7 @@ export const useFetchMyProfile = () => {
         queryKey: ["me"],
         gcTime: 1000 * 60 * 60, // 1시간동안 캐싱 한시간
         staleTime: 1000 * 60 * 60, // 한시간에 한번 리패칭
-        // retry:2,
+        retry:0,
         refetchOnWindowFocus: false, // 윈도우 탭 전환시, 다시 패치 false
 
     })
@@ -118,6 +118,10 @@ export const useFetchUserProfile = (userId:string|undefined|null) => {
         refetchOnWindowFocus: false, // 윈도우 탭 전환시, 다시 패치 false
         enabled: !!userId,
     })
+}
+
+export function deleteMe() {
+    return deleteWithToken('users/me')
 }
 
 // export const useFetchMyRiotInfo = () => {

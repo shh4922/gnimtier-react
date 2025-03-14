@@ -36,6 +36,7 @@ const UserDetailPage = () => {
                         <img className={styles.tierImage} src={`${tier.getTierImage(riotInfo.summoners.entry.RANKED_TFT.tier)}`} alt={"티어 이미지"}/>
                         <div className={styles.tierAndPointText}>
                             <span>{tier.getTierName(riotInfo.summoners.entry.RANKED_TFT.tier)}</span>
+                            <span>{tier.getRankToRoma(riotInfo.summoners.entry.RANKED_TFT.rank)}</span>
                             <span>{riotInfo.summoners.entry.RANKED_TFT.leaguePoints} LP</span>
                         </div>
                     </div>

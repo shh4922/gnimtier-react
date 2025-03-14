@@ -45,7 +45,16 @@ const GroupRankingPage = () => {
 
     useEffect(() => {
         if (groupUserResponse) {
-            setGroupUserList((prevList) => [...prevList, ...groupUserResponse.data]);
+            // setGroupUserList((prevList) => [...prevList, ...groupUserResponse.data]);
+            setGroupUserList((prevList) => {
+                const newData = groupUserResponse.data;
+
+                // 기존 데이터와 새 데이터를 합친 후 userId 기준으로 중복 제거
+                const mergedList = [...prevList, ...newData];
+                const uniqueList = Array.from(new Map(mergedList.map(user => [user.user.id, user])).values());
+
+                return uniqueList;
+            });
             setHasNext(groupUserResponse.hasNext);
             console.log(groupUserResponse.data);
         }
@@ -57,7 +66,7 @@ const GroupRankingPage = () => {
             <ul >
                 {groupUserList?.map((user, index) => (
                     <motion.div
-                        key={user.user.id}
+                        key={index}
                         initial={{opacity: 0, y: 10}}
                         animate={{opacity: 1, y: 0}}
                         transition={{duration: 0.3}}
@@ -66,6 +75,7 @@ const GroupRankingPage = () => {
                             userId={user.user.id}
                             rank={index}
                             profileImageUrl={user.user.profileImageUrl}
+                            userName={user.user.nickname}
                             gameName={user.summoner.gameName}
                             tier={user.summoner.entry.RANKED_TFT.tier}
                             point={user.summoner.entry.RANKED_TFT.leaguePoints}

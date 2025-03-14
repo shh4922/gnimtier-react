@@ -10,18 +10,19 @@ const RsoPage = () => {
     const navigate = useNavigate();
 
     const  userInfo  = useUserStore()
-    const {data:myRiotInfo} = useFetchRiotInfo(userInfo.userId)
+    const {data:myRiotInfo, isSuccess} = useFetchRiotInfo(userInfo.userId)
 
     const {mutate} = usePostRiotAccount()
     const {refetch} = useFetchRiotAccount(gameName,tagLine)
 
 
     useEffect(() => {
-        if (myRiotInfo?.summoners !== null) {
+        if (myRiotInfo !== undefined) {
+            console.log(myRiotInfo?.summoners)
             alert("이미계정있음 ㅅㄱ")
             navigate(-1)
         }
-    }, [userInfo]);
+    }, [isSuccess]);
 
     const postRiotAccount = async () => {
         if(gameName === "" || tagLine === "" ){

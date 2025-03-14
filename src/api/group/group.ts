@@ -49,7 +49,8 @@ export const useFetchGroupList = (userId:string|undefined|null) => {
     });
 };
 
-export const useFetchGroupsUserByGroupId = (groupId?: string, page=0) => {
+export const useFetchGroupsUserByGroupId = (groupId?: string|null, page=0) => {
+
     const params = {
         "groupId": `${groupId}`,
         "sortBy": "tier",
@@ -65,6 +66,17 @@ export const useFetchGroupsUserByGroupId = (groupId?: string, page=0) => {
         enabled: !!groupId, // groupId가 있을 때만 실행
     });
 };
+
+export const fetchGroupsUserByGroupId = (groupId:string|undefined|null, page=0) => {
+    const params = {
+        "groupId": `${groupId}`,
+        "sortBy": "tier",
+        "page" : `${page}`
+    }
+    return getWithToken<tftUserInfoResponse>('/riot/tft/leaderboard/by-group',{
+        params: params
+    })
+}
 
 /**
  * 투표중인 그룹

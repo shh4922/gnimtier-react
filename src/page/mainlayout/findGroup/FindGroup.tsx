@@ -3,13 +3,16 @@ import {createSearchParams, Link, useLocation, useNavigate} from "react-router-d
 import {Group, postJoinGroup, useFetchGroupByParentId} from "@/api/group/group";
 import {useEffect} from "react";
 import qs from 'qs'
+import {useFetchRiotInfo} from "@/api/riot/riot.ts";
+import useUserStore from "@/store/userStore.ts";
 
 export default function FindGroup() {
+    const userInfo = useUserStore()
     const location = useLocation();
     const navigate = useNavigate();
     const query = qs.parse(location.search, { ignoreQueryPrefix: true });
     const {data:groupList} = useFetchGroupByParentId(query.groupId as string);
-
+    const {data: riotInfo, isSuccess, error} = useFetchRiotInfo(userInfo.userId)
 
     function clickGroup(group:Group) {
         if(group.isJoinable) {
@@ -27,11 +30,26 @@ export default function FindGroup() {
         }
     }
 
+    useEffect(() => {
+        console.log('riot',riotInfo)
+    }, [isSuccess]);
+
+    // useEffect(() => {
+    //     console.log('riot error',error)
+    // }, [error]);
+
+    if(error) {
+        alert("엥 님아 라이엇계정먼저 연결해줘야함")
+        navigate('/mypage')
+    }
+
+
     async function joinGroup(groupId:string) {
         try {
             const res = await postJoinGroup(groupId) as {status:string};
             if(res.status === "ACCEPTED" ) {
                 alert("가입했음 추카야")
+                navigate("/")
             }
         } catch (e) {
             alert("이미 가입했거나, 가입실패했음...;")
