@@ -3,6 +3,7 @@ import Tier from "@/common/Tier";
 import {useNavigate} from "react-router-dom";
 
 interface RankItemProps {
+    index: number
     userId: string;
     rank: number;
     profileImageUrl: string;
@@ -16,7 +17,7 @@ interface RankItemProps {
 
 }
 
-export default function MainRankCell({ userId, rank, profileImageUrl, userName, gameName, tier, point, win, lose }: RankItemProps) {
+export default function MainRankCell({ index, userId, rank, profileImageUrl, userName, gameName, tier, point, win, lose }: RankItemProps) {
 
     const tier2 = new Tier()
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function MainRankCell({ userId, rank, profileImageUrl, userName, 
     return (
         <div className={styles.rankItem} onClick={() => {moveToDetail(userId)}}>
 
-            <p className={styles.rank}>{rank+1} 등</p>
+            <p className={styles.rank}>{index+1} 등</p>
 
             <div className={styles.rowTwo}>                   {/* 2 */}
                 <img src={profileImageUrl} alt="profileImageUrl" />

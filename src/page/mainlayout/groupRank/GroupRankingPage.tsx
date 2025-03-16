@@ -72,8 +72,9 @@ const GroupRankingPage = () => {
                         transition={{duration: 0.3}}
                     >
                         <MainRankCell
+                            index={index}
                             userId={user.user.id}
-                            rank={index}
+                            rank={user.summoner.entry.RANKED_TFT.rank}
                             profileImageUrl={user.user.profileImageUrl}
                             userName={user.user.nickname}
                             gameName={user.summoner.gameName}

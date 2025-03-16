@@ -70,7 +70,7 @@ export default function Home() {
 
                         {
                             groupUserResponse?.data.map((user,index) => {
-                                return <MainRankCell userId={user.user.id} rank={index} profileImageUrl={user.user.profileImageUrl} userName={user.user.nickname} gameName={user.summoner.gameName} tier={user.summoner.entry.RANKED_TFT.tier} point={user.summoner.entry.RANKED_TFT.leaguePoints} win={user.summoner.entry.RANKED_TFT.wins} lose={user.summoner.entry.RANKED_TFT.losses} key={index}/>
+                                return <MainRankCell index={index} userId={user.user.id} rank={user.summoner.entry.RANKED_TFT.rank} profileImageUrl={user.user.profileImageUrl} userName={user.user.nickname} gameName={user.summoner.gameName} tier={user.summoner.entry.RANKED_TFT.tier} point={user.summoner.entry.RANKED_TFT.leaguePoints} win={user.summoner.entry.RANKED_TFT.wins} lose={user.summoner.entry.RANKED_TFT.losses} key={index}/>
                             })
                         }
                         <button onClick={()=>{moveToGroupList(groupData?.groups[0] ?? null)}}>더보기</button>
