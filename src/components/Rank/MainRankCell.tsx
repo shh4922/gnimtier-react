@@ -58,7 +58,7 @@ export default function MainRankCell({ index, userId, rank, profileImageUrl, use
                     <span>승리: {win}</span>
                     <span>패배: {lose}</span>
 
-                    <span>승률: {(win/(win+lose)*100).toFixed(3)}</span>
+                    <span>승률: { win === 0 && lose === 0 ? 0 :(win/(win+lose)*100).toFixed(3)}</span>
                 </div>
             </div>
         </div>

@@ -25,10 +25,6 @@ export default function Home() {
 
     /** 그룹데이터 없을경우 */
     useEffect(() => {
-
-        // if(groupData === undefined) {
-        //     return;
-        // }
         if(myInfo.userId !== null && groupSuccess && !groupListLoading) {
             if(groupData?.groups.length === 0) {
                 console.log(groupData)
@@ -39,6 +35,9 @@ export default function Home() {
         }
     }, [groupData,groupSuccess]);
 
+    if(error) {
+        console.error(error)
+    }
 
 
     const moveToGroupList = (group:Group|null) => {

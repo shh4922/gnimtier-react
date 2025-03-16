@@ -31,7 +31,7 @@ export interface Summoner {
     revisionDate: number;
     summonerLevel: number;
     entry: {
-        RANKED_TFT: SummonerEntry;
+        RANKED_TFT: SummonerEntry|null
     };
 }
 

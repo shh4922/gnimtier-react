@@ -5,13 +5,55 @@ import styles from "./UserDetail.module.scss"
 // import styles from "@/components/Rank/css/mainRankCell.module.scss";
 import Tier from "@/common/Tier";
 import {useFetchGroupList} from "@/api/group/group";
+import {Comment, useFetchCommentsByUserId} from "@/api/comments/comments.ts";
+import {useCallback, useEffect, useRef, useState} from "react";
 
 const UserDetailPage = () => {
     const params = useParams();
     const tier = new Tier()
     const {data:userInfo } = useFetchUserProfile(params.userId);
-    const {data:riotInfo } = useFetchRiotInfo(params.userId)
+    const {data:riotInfo} = useFetchRiotInfo(params.userId)
     const {data: groupList } = useFetchGroupList(params.userId);
+    const {data: commentResponse, isLoading:isCommentsLoading, isSuccess:commentsSuccess } = useFetchCommentsByUserId(params.userId);
+    const [commentsList, setCommentsList] = useState<Comment[]>([]);
+
+
+    const [page, setPage] = useState<number>(0);
+    const [hasNext, setHasNext] = useState<boolean>(false);
+    const observerRef = useRef<IntersectionObserver | null>(null);
+    const observerTargetRef = useRef<HTMLDivElement | null>(null);
+
+    const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
+        const target = entries[0];
+        if (target.isIntersecting && !isCommentsLoading && hasNext) {
+            setPage((prevPage) => prevPage + 1);
+        }
+    }, [hasNext]);
+
+
+    useEffect(() => {
+        if (observerRef.current) observerRef.current.disconnect();
+        observerRef.current = new IntersectionObserver(handleObserver, { threshold: 0 });
+
+        if (observerTargetRef.current) {
+            observerRef.current.observe(observerTargetRef.current);
+        }
+
+        return () => observerRef.current?.disconnect();
+    }, [handleObserver]);
+
+    useEffect(() => {
+        if (commentResponse) {
+            setCommentsList((prevList) => {
+                const newData = commentResponse.data;
+                const mergedList = [...prevList, ...newData];
+
+                return mergedList;
+            });
+            setHasNext(commentResponse.hasNext);
+        }
+    }, [commentResponse]);
+
 
     function updateUserInfo(){
         alert("아직 준비중임..ㅈㅅ요..")
@@ -33,19 +75,19 @@ const UserDetailPage = () => {
 
                 <div className={styles.rowThree}>
                     <div className={styles.tierAndPoint}>
-                        <img className={styles.tierImage} src={`${tier.getTierImage(riotInfo.summoners.entry.RANKED_TFT.tier)}`} alt={"티어 이미지"}/>
+                        <img className={styles.tierImage} src={`${tier.getTierImage(riotInfo.summoners.entry.RANKED_TFT?.tier ?? 0)}`} alt={"티어 이미지"}/>
                         <div className={styles.tierAndPointText}>
-                            <span>{tier.getTierName(riotInfo.summoners.entry.RANKED_TFT.tier)}</span>
-                            <span>{tier.getRankToRoma(riotInfo.summoners.entry.RANKED_TFT.rank)}</span>
-                            <span>{riotInfo.summoners.entry.RANKED_TFT.leaguePoints} LP</span>
+                            <span>{tier.getTierName(riotInfo.summoners.entry.RANKED_TFT?.tier ?? 0)}</span>
+                            <span>{tier.getRankToRoma(riotInfo.summoners.entry.RANKED_TFT?.rank ?? 0)}</span>
+                            <span>{riotInfo.summoners.entry.RANKED_TFT?.leaguePoints ?? 0} LP</span>
                         </div>
                     </div>
 
                     <div className={styles.winRateBox}>
                         <span>Lv: {riotInfo.summoners.summonerLevel}</span>
-                        <span>승리: {riotInfo.summoners.entry.RANKED_TFT.wins}</span>
-                        <span>패배: {riotInfo.summoners.entry.RANKED_TFT.losses}</span>
-                        <span>승률: {(riotInfo.summoners.entry.RANKED_TFT.wins / (riotInfo.summoners.entry.RANKED_TFT.wins + riotInfo.summoners.entry.RANKED_TFT.losses) * 100).toFixed(3)}</span>
+                        <span>승리: {riotInfo.summoners.entry.RANKED_TFT?.wins ?? 0}</span>
+                        <span>패배: {riotInfo.summoners.entry.RANKED_TFT?.losses ?? 0}</span>
+                        <span>승률: {riotInfo.summoners.entry.RANKED_TFT === null ? 0 : (riotInfo.summoners.entry.RANKED_TFT.wins  / (riotInfo.summoners.entry.RANKED_TFT.wins + riotInfo.summoners.entry.RANKED_TFT.losses) * 100).toFixed(3)}</span>
                     </div>
                     <button onClick={updateUserInfo}>전적갱신버튼</button>
                 </div>
@@ -71,6 +113,33 @@ const UserDetailPage = () => {
                         )
                     })
                 }
+            </section>
+
+            <section className={styles.comments}>
+                <div className={styles.commentsHead}>
+                    <span className={styles.include}>방명록</span>
+                    <button>작성하기</button>
+                </div>
+
+                <ul className={styles.commentsList}>
+                    {
+                        commentsList.length === 0 ? (
+                            <li>방명록이 없음;</li>
+                        ) : (
+                            commentsList.map((commnets) => {
+                                return (
+                                    <li>
+                                        <span>{commnets.comment}ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅁㄴ아ㅓㅁ농ㅁ나어ㅗㅁ나어ㅗㅁ나옴나ㅣㅓㅗㅁㄴ아ㅓㅗㅁㄴ아ㅓㅁ노암너왐ㄴ어ㅗㅁㄴ아ㅓㅗㅂ자ㅓㅗㄷ만어ㅗㅁ나어ㅗㅁㄴ아ㅓㅗㄴㅇ</span>
+                                        <button>??</button>
+                                    </li>
+                                )
+                            })
+                        )
+                    }
+                    <div ref={observerTargetRef} style={{height: "60px", visibility: "hidden"}}></div>
+                </ul>
+
+
             </section>
         </div>
     )

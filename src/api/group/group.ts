@@ -39,6 +39,11 @@ export interface GroupListResponse {
     groups: Group[];
 }
 
+/**
+ * userId가 속한 그룹을 보여줌.
+ * 하지만 riotId를 인증하지않으면 400에러가 뜨는데, 이게 내가없을때인지, 해당유저가 인증안했을때인지를 잘 모르겠음
+ * @param userId
+ */
 export const useFetchGroupList = (userId:string|undefined|null) => {
     return useQuery({
         queryKey: ['groupList', userId],

@@ -1,6 +1,7 @@
 class Tier {
     getTierName(tier: number): string {
         switch (tier) {
+            case 0: return '언랭크';
             case 1: return 'Iron';
             case 2: return 'Bronze';
             case 3: return 'Silver';
@@ -17,6 +18,7 @@ class Tier {
 
     getTierImage(tier: number): string {
         switch (tier) {
+            case 0: return '/assets/tier/unrank.png';
             case 1: return '/assets/tier/Iron.png';
             case 2: return '/assets/tier/bronze.png';
             case 3: return '/assets/tier/silver.png';
@@ -33,6 +35,7 @@ class Tier {
 
     getRankToRoma(rank:number):string {
         switch (rank) {
+            case 0 : return '';
             case 1: return 'I';
             case 2: return 'II';
             case 3: return 'III';

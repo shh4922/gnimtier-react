@@ -56,9 +56,7 @@ const GroupRankingPage = () => {
                 return uniqueList;
             });
             setHasNext(groupUserResponse.hasNext);
-            console.log(groupUserResponse.data);
         }
-        console.log("gInfo", groupInfo)
     }, [groupUserResponse,groupInfo]);
 
     return (
@@ -74,14 +72,14 @@ const GroupRankingPage = () => {
                         <MainRankCell
                             index={index}
                             userId={user.user.id}
-                            rank={user.summoner.entry.RANKED_TFT.rank}
+                            rank={user.summoner.entry.RANKED_TFT?.rank ?? 0}
                             profileImageUrl={user.user.profileImageUrl}
                             userName={user.user.nickname}
                             gameName={user.summoner.gameName}
-                            tier={user.summoner.entry.RANKED_TFT.tier}
-                            point={user.summoner.entry.RANKED_TFT.leaguePoints}
-                            win={user.summoner.entry.RANKED_TFT.wins}
-                            lose={user.summoner.entry.RANKED_TFT.losses}
+                            tier={user.summoner.entry.RANKED_TFT?.tier ?? 0}
+                            point={user.summoner.entry.RANKED_TFT?.leaguePoints ?? 0}
+                            win={user.summoner.entry.RANKED_TFT?.wins ?? 0}
+                            lose={user.summoner.entry.RANKED_TFT?.losses ?? 0}
                         />
                     </motion.div>
                 ))}
