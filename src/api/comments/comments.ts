@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {getWithToken} from "@/api/http.ts";
+import {getWithToken, postWithToken} from "@/api/http.ts";
 import {User} from "@/api/user/model.tft.ts";
 
 
@@ -33,4 +33,16 @@ export const useFetchCommentsByUserId = (userId : string|null|undefined) => {
         refetchOnWindowFocus: false, // 윈도우 탭 전환시, 다시 패치 false
         enabled: !!userId
     })
+}
+
+/**
+ * post 댓글
+ * @param userId 댓글달리는 유저 id
+ * @param comment 댓글내용
+ */
+export const postComment = (userId:string, comment:string) => {
+    const data = {
+        comment: comment,
+    }
+    return postWithToken(`users/${userId}/comments`,data)
 }

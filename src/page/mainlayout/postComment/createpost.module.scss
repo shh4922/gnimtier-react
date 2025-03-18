@@ -1,0 +1,41 @@
+.commentContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+
+}
+
+.commentArea {
+  resize: none;
+  overflow: hidden;
+  word-wrap: break-word;
+  width: 100%;
+  height: 30vh;
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  box-sizing: border-box; // 💡 패딩 포함한 크기 유지
+}
+
+.commentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .cancle {
+    color: gray;
+    border: none;
+    font-size: 1.4rem;
+    background: none;
+  }
+}
+
+
+.submit {
+  margin-top: 1rem;
+  border: none;
+  background-color: #f4aaaa;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}

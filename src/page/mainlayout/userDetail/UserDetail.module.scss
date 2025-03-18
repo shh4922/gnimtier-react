@@ -1,8 +1,10 @@
 .userDetailContainer {
-
   display: flex;
+  flex: 1;
   flex-direction: column;
-  //padding: 1rem;
+  padding: 1rem;
+  height: 100%;
+
 
   .userInfo {
     display: flex;
@@ -121,6 +123,7 @@
   box-sizing: border-box;
   gap: 1rem;
 
+
   span {
     font-size: 1.7rem;
     font-family: "title-font" , sans-serif;
@@ -150,6 +153,7 @@
 .comments {
   margin-top: 1rem;
   padding: 0 2rem;
+  height: 100%;
 
   span {
     font-size: 1.7rem;
@@ -162,35 +166,33 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+
+    button {
+      border: none;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-family: "title-font" , sans-serif;
+      color: black;
+      background-color: lightgrey;
+    }
   }
 
   .commentsList {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
-  li {
-    font-size: 1.7rem;
-    font-family: "title-font" , sans-serif;
-    border: 0.4rem solid #242424;
-    padding: 1rem;
-    box-sizing: border-box; // 💡 패딩 포함한 크기 유지
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
 
-    span {
-      width: 90%;
-    }
-    button {
-      width: 10%;
-      background-color: #616161;
-      border: none;
-      color: white;
+    li {
+      font-size: 1.7rem;
+      font-family: "title-font" , sans-serif;
+      border: 0.2rem solid #242424;
       padding: 1rem;
+      box-sizing: border-box; // 💡 패딩 포함한 크기 유지
       border-radius: 0.5rem;
+
     }
   }
+
 }
 
 

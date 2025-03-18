@@ -23,10 +23,14 @@ const Router = () => {
                 <Route path={''} element={<Home/>}></Route>
                 <Route path={'group/:groupId'} element={<GroupRankingPage/>}></Route>
                 <Route path={'findGroup'} element={<FindGroup />}></Route>
-                <Route path={'myPage'} element={<MyPage />}></Route>
+
                 <Route path={'rso'} element={<RsoPage />}></Route>
+
+                <Route path={'myPage'} element={<MyPage />}></Route>
                 <Route path={'voteGroup'} element={<VoteGroupPage />}></Route>
                 <Route path={'profile/:userId'} element={<UserDetailPage />}></Route>
+
+                <Route path={'post/:userId'} element={<UserDetailPage />}></Route>
                 <Route path={'/kakaoLogin'} element={<KakaoLogin/>}></Route>
             </Route>
 

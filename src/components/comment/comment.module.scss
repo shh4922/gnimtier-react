@@ -1,0 +1,26 @@
+.comment {
+  font-size: 1.7rem;
+  font-family: "title-font" , sans-serif;
+  border: 0.2rem solid #242424;
+  padding: 1rem;
+  box-sizing: border-box; // 💡 패딩 포함한 크기 유지
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+
+
+  span {
+    width: 80%;
+    margin-right: 1rem;
+    font-family: "sans-serif";
+    font-size: 1.4rem;
+  }
+  button {
+    width: 20%;
+    background-color: #616161;
+    border: none;
+    color: white;
+    //padding: 1rem;
+    border-radius: 0.5rem;
+  }
+}
